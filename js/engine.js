@@ -1,10 +1,115 @@
 export class Game {
- constructor(random=Math.random){this.random=random;this.reset();}
- reset(){Object.assign(this,{phase:'ready',time:120,score:14,spot:25,target:35,down:1,yard:25,lane:2,defenders:[],tick:0,steps:0,gained:0,message:'Find a lane. Beat the defense.'});this.setup();}
- setup(){this.lane=2;this.yard=this.spot;this.defenders=[];for(let i=0;i<6;i++)this.defenders.push({lane:Math.floor(this.random()*5),yard:this.spot+5+i*4});this.tick=0;this.steps=0;}
- snap(){if(this.phase==='over'){this.reset();return;}if(this.phase!=='ready')return;this.setup();this.phase='live';this.message='Go! Run toward the top end zone.';}
- move(direction){if(this.phase!=='live')return;const previous=this.yard;if(direction==='left')this.lane=Math.max(0,this.lane-1);if(direction==='right')this.lane=Math.min(4,this.lane+1);if(direction==='up')this.yard++;if(direction==='down')this.yard=Math.max(0,this.yard-1);this.steps++;this.gained=Math.max(this.gained,this.yard-25);if(this.yard>=100){this.score=20;this.phase='over';this.message='TOUCHDOWN! You win, 20–19.';return;}if(this.yard===0&&previous===1){this.phase='over';this.message='Safety. The final drive is over.';return;}this.collision();}
- collision(){if(this.defenders.some(d=>d.lane===this.lane&&d.yard===this.yard))this.finish();}
- finish(){if(this.phase!=='live')return;const gain=this.yard-this.spot;this.spot=this.yard;if(this.spot>=this.target){this.down=1;this.target=Math.min(100,this.spot+10);this.message=`First down! ${gain} yards on the play.`;}else{this.down++;this.message=`Tackled. ${gain>=0?'+':''}${gain} yards.`;}if(this.down>4){this.phase='over';this.message='Turnover on downs. The defense holds.';}else this.phase='ready';}
- update(dt){if(this.phase!=='live')return;this.time=Math.max(0,this.time-dt);if(this.time===0){this.phase='over';this.message='Time expired. The defense holds, 19–14.';return;}this.tick+=dt;const interval=.60-Math.min(.14,(this.yard-25)*.0018);while(this.tick>=interval&&this.phase==='live'){this.tick-=interval;for(const d of this.defenders){if(d.yard<this.yard-5){d.yard=this.yard+14+Math.floor(this.random()*10);d.lane=Math.floor(this.random()*5);}else if(this.random()<.64&&d.lane!==this.lane)d.lane+=Math.sign(this.lane-d.lane);else d.yard+=Math.sign(this.yard-d.yard);this.collision();if(this.phase!=='live')break;}}}
+  constructor(random = Math.random) {
+    this.random = random;
+    this.reset();
+  }
+
+  reset() {
+    Object.assign(this, {
+      phase: 'ready', time: 120, score: 14, spot: 25, target: 35,
+      down: 1, yard: 25, lane: 2, defenders: [], tick: 0, steps: 0,
+      gained: 0, playNumber: 0,
+      message: 'Read the defense. The formation you see is the formation you play.'
+    });
+    this.setup();
+  }
+
+  setup() {
+    this.lane = 2;
+    this.yard = this.spot;
+    this.defenders = [];
+    for (let i = 0; i < 6; i++) {
+      this.defenders.push({ lane: Math.floor(this.random() * 5), yard: this.spot + 5 + i * 4 });
+    }
+    this.tick = 0;
+    this.steps = 0;
+    this.playNumber++;
+  }
+
+  snap() {
+    if (this.phase === 'over') {
+      this.reset();
+      return;
+    }
+    if (this.phase !== 'ready') return;
+    // The ready formation is authoritative: never roll new positions on snap.
+    this.phase = 'live';
+    this.message = 'Find the gap. Attack the top end zone.';
+  }
+
+  move(direction) {
+    if (this.phase !== 'live') return;
+    const previous = this.yard;
+    if (direction === 'left') this.lane = Math.max(0, this.lane - 1);
+    if (direction === 'right') this.lane = Math.min(4, this.lane + 1);
+    if (direction === 'up') this.yard++;
+    if (direction === 'down') this.yard = Math.max(0, this.yard - 1);
+    this.steps++;
+    this.gained = Math.max(this.gained, this.yard - 25);
+    if (this.yard >= 100) {
+      this.score = 20;
+      this.phase = 'over';
+      this.message = 'TOUCHDOWN! Great Lakes wins, 20–19. Start a new drive to play again.';
+      return;
+    }
+    if (this.yard === 0 && previous === 1) {
+      this.phase = 'over';
+      this.message = 'Safety. The final drive is over.';
+      return;
+    }
+    this.collision();
+  }
+
+  collision() {
+    if (this.defenders.some(d => d.lane === this.lane && d.yard === this.yard)) this.finish();
+  }
+
+  finish() {
+    if (this.phase !== 'live') return;
+    const gain = this.yard - this.spot;
+    this.spot = this.yard;
+    if (this.spot >= this.target) {
+      this.down = 1;
+      this.target = Math.min(100, this.spot + 10);
+      this.message = `FIRST DOWN · ${gain} yards. Next formation is set. Snap when ready.`;
+    } else {
+      this.down++;
+      this.message = `TACKLED · ${gain >= 0 ? '+' : ''}${gain} yards. Next formation is set. Snap when ready.`;
+    }
+    if (this.down > 4) {
+      this.phase = 'over';
+      this.message = 'Turnover on downs. The defense holds. Start a new drive to try again.';
+    } else {
+      this.phase = 'ready';
+      // Prepare the upcoming play now, so the user can inspect it before snap.
+      this.setup();
+    }
+  }
+
+  update(dt) {
+    if (this.phase !== 'live') return;
+    this.time = Math.max(0, this.time - dt);
+    if (this.time === 0) {
+      this.phase = 'over';
+      this.message = 'Time expired. Iron Valley holds, 19–14. Start a new drive to try again.';
+      return;
+    }
+    this.tick += dt;
+    const interval = .60 - Math.min(.14, (this.yard - 25) * .0018);
+    while (this.tick >= interval && this.phase === 'live') {
+      this.tick -= interval;
+      for (const d of this.defenders) {
+        if (d.yard < this.yard - 5) {
+          d.yard = this.yard + 14 + Math.floor(this.random() * 10);
+          d.lane = Math.floor(this.random() * 5);
+        } else if (this.random() < .64 && d.lane !== this.lane) {
+          d.lane += Math.sign(this.lane - d.lane);
+        } else {
+          d.yard += Math.sign(this.yard - d.yard);
+        }
+        this.collision();
+        if (this.phase !== 'live') break;
+      }
+    }
+  }
 }

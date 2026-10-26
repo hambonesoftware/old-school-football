@@ -1,4 +1,4 @@
-# Old School Football — v0.1
+# Old School Football — v0.2
 An original browser running challenge inspired by red LED handheld football, with a striped field and small animated football players. No third-party assets, dependencies, accounts, analytics, or external requests.
 
 ## Play
@@ -22,3 +22,12 @@ Serve this folder using `python3 -m http.server 8000`, then open http://localhos
 - style.css: responsive layout.
 
 Best-drive yards are stored in this browser when storage is available. Clearing website data clears the record. Gameplay remains available if storage is blocked. Sound starts off. Backgrounding pauses live play.
+
+## v0.2 — Broadcast presentation and pre-snap flow
+- Field-first responsive layout with a compact college broadcast inspired score strip, original Great Lakes and Iron Valley team graphics, turf details, uniform numbers and a player selection ring.
+- Snap sits beside the direction pad in a dedicated control deck below the field.
+- Play results and pause messages stay in the status strip; no automatic overlays obscure the players.
+- The next formation is prepared after a tackle. Snap preserves that exact formation and does not reroll the defense.
+- Smooth visual movement, device-pixel-ratio-aware rendering and reduced-motion support.
+- Settings are opened explicitly and pause a live play.
+- Nine engine tests cover the original rules and formation-preview regressions.

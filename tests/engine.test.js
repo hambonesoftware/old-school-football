@@ -6,3 +6,25 @@ test('touchdown wins immediately',()=>{const g=new Game();g.snap();g.yard=99;g.m
 test('clock expires; pause does not consume time',()=>{const g=new Game();g.snap();g.phase='paused';g.update(5);assert.equal(g.time,120);g.phase='live';g.time=.01;g.update(.02);assert.equal(g.time,0);assert.equal(g.phase,'over');});
 test('contact ends a play',()=>{const g=new Game();g.snap();g.defenders=[{lane:2,yard:26}];g.move('up');assert.equal(g.phase,'ready');assert.equal(g.down,2);});
 test('new challenge resets previous result',()=>{const g=new Game();g.phase='over';g.snap();assert.equal(g.phase,'ready');assert.equal(g.spot,25);assert.equal(g.time,120);});
+test('snap preserves the exact preview formation without consuming randomness',()=>{
+ let calls=0;
+ const g=new Game(()=>{calls++;return (calls%5)/5;});
+ const preview=structuredClone({lane:g.lane,yard:g.yard,defenders:g.defenders,play:g.playNumber});
+ const before=calls;
+ g.update(10);
+ assert.equal(g.time,120);
+ g.snap();
+ assert.deepEqual({lane:g.lane,yard:g.yard,defenders:g.defenders,play:g.playNumber},preview);
+ assert.equal(calls,before);
+});
+test('tackle prepares next snap formation immediately and it remains stable',()=>{
+ let calls=0;
+ const g=new Game(()=>((calls++%5)/5));
+ g.snap();g.yard=32;g.finish();
+ assert.equal(g.phase,'ready');assert.equal(g.yard,32);assert.equal(g.lane,2);
+ assert.equal(g.defenders[0].yard,37);
+ const upcoming=structuredClone(g.defenders);
+ g.update(30);g.move('up');
+ assert.deepEqual(g.defenders,upcoming);assert.equal(g.yard,32);
+ g.snap();assert.deepEqual(g.defenders,upcoming);
+});

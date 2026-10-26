@@ -1,12 +1,246 @@
-export function render(ctx,g,led,t){
- const w=650,h=850;ctx.clearRect(0,0,w,h);ctx.fillStyle=led?'#080c0a':'#23492b';ctx.fillRect(0,0,w,h);const cam=Math.max(12,Math.min(88,g.yard+13));const y=v=>h*.52-(v-cam)*18;const x=l=>125+l*100;
- for(let v=0;v<100;v+=5){ctx.fillStyle=led?'#0c140f':(v%10===0?'#32652f':'#2c5b2c');ctx.fillRect(55,y(v+5),540,90);}
- for(const end of [0,100]){ctx.fillStyle=led?'#22100d':end===100?'#214e64':'#6e3829';ctx.fillRect(55,end===100?y(110):y(0),540,180);ctx.save();ctx.translate(325,end===100?y(105):y(-5));ctx.fillStyle='#f5eed2';ctx.font='900 35px system-ui';ctx.textAlign='center';ctx.fillText(end===100?'HAMBONE':'HOME FIELD',0,0);ctx.restore();}
- ctx.strokeStyle=led?'#4c251f':'#e2edc4b0';ctx.lineWidth=2;ctx.strokeRect(55,0,540,h);
- for(let v=0;v<=100;v++){const py=y(v);if(py<0||py>h)continue;ctx.beginPath();if(v%5===0){ctx.moveTo(55,py);ctx.lineTo(595,py);}else{ctx.moveTo(245,py);ctx.lineTo(254,py);ctx.moveTo(396,py);ctx.lineTo(405,py);}ctx.stroke();if(v%10===0&&v>0&&v<100){ctx.fillStyle='#e7ecc9a0';ctx.font='bold 23px system-ui';ctx.textAlign='center';ctx.fillText(String(Math.min(v,100-v)),85,py-8);ctx.fillText(String(Math.min(v,100-v)),565,py-8);}}
- for(let i=0;i<42;i++){ctx.fillStyle=['#c86d42','#d9c87c','#456d81','#ada7a0'][i%4];ctx.fillRect(12+(i%2)*17,i*23%850,8,8);ctx.fillRect(614+(i%2)*17,i*23%850,8,8);}
- function line(v,color){ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(56,y(v));ctx.lineTo(594,y(v));ctx.stroke();}line(g.spot,'#74bded');line(g.target,'#ffd16c');
- function player(l,v,home,idx){const px=x(l),py=y(v);if(py<-50||py>900)return;ctx.save();ctx.translate(px,py);if(led){ctx.fillStyle=home?'#ff6c42':'#ff251d';ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=home?22:9;ctx.fillRect(-12,-7,24,14);ctx.restore();return;}const run=g.phase==='live'?Math.sin(t*15+idx)*5:0;ctx.fillStyle='#07180b65';ctx.beginPath();ctx.ellipse(3,12,18,9,0,0,7);ctx.fill();ctx.fillStyle='#0d1a23';ctx.fillRect(-10,-1,8,17+run);ctx.fillRect(3,-1,8,17-run);ctx.fillStyle='#f1e8d0';ctx.fillRect(-11,12+run,9,5);ctx.fillRect(3,12-run,9,5);ctx.fillStyle=home?'#f1b84d':'#d84f3c';ctx.beginPath();ctx.roundRect(-15,-15,30,24,7);ctx.fill();ctx.fillStyle='#e7dbc0';ctx.fillRect(-18,-8+run/2,6,12);ctx.fillRect(12,-8-run/2,6,12);ctx.fillStyle=home?'#f1ead6':'#263343';ctx.beginPath();ctx.ellipse(0,-19,11,12,0,0,7);ctx.fill();ctx.fillStyle=home?'#d84f3c':'#f6cb6e';ctx.fillRect(-2,-30,4,18);ctx.strokeStyle='#111d26';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-8,-25);ctx.lineTo(8,-25);ctx.stroke();if(home){ctx.fillStyle='#824624';ctx.beginPath();ctx.ellipse(15,-1,5,8,-.3,0,7);ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(14,-5,2,7);ctx.strokeStyle='#ffda6d';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(0,17,23,10,0,0,7);ctx.stroke();}ctx.restore();}
- for(let i=0;i<g.defenders.length;i++)player(g.defenders[i].lane,g.defenders[i].yard,false,i);player(g.lane,g.yard,true,8);
- if(g.phase!=='live'){ctx.fillStyle='#081218d9';ctx.beginPath();ctx.roundRect(95,200,460,106,14);ctx.fill();ctx.fillStyle='#ffd16c';ctx.textAlign='center';ctx.font='900 27px system-ui';ctx.fillText(g.phase==='over'?(g.score===20?'TOUCHDOWN!':'DRIVE OVER'):g.phase==='paused'?'PAUSED':'FIND YOUR OPENING',325,244);ctx.fillStyle='#eff0df';ctx.font='14px system-ui';ctx.fillText(g.phase==='over'?'Start a new challenge':g.phase==='paused'?'Press Resume to continue':'Tap SNAP THE BALL to begin',325,277);}
+// Presentation state only. Interpolation never changes the rules or collision cells.
+const views = new WeakMap();
+
+function rounded(ctx, x, y, width, height, radius, fill) {
+  ctx.fillStyle = fill;
+  ctx.beginPath();
+  ctx.roundRect(x, y, width, height, radius);
+  ctx.fill();
+}
+
+function athlete(ctx, x, y, home, number, running, time, scale, led, reducedMotion) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+  if (led) {
+    ctx.fillStyle = home ? '#ff8158' : '#ff3128';
+    ctx.shadowColor = ctx.fillStyle;
+    ctx.shadowBlur = home ? 20 : 9;
+    ctx.fillRect(-12, -7, 24, 14);
+    ctx.restore();
+    return;
+  }
+  if (!home) ctx.rotate(Math.PI);
+  const stride = running && !reducedMotion ? Math.sin(time * 17 + number) * 4 : 0;
+  ctx.fillStyle = '#04140770';
+  ctx.beginPath();
+  ctx.ellipse(4, 10, 18, 9, 0, 0, Math.PI * 2);
+  ctx.fill();
+  rounded(ctx, -10, 0, 8, 17 + stride, 3, home ? '#122b42' : '#e8dfd2');
+  rounded(ctx, 2, 0, 8, 17 - stride, 3, home ? '#122b42' : '#e8dfd2');
+  rounded(ctx, -11, 12 + stride, 9, 6, 2, '#f6f2df');
+  rounded(ctx, 2, 12 - stride, 9, 6, 2, '#f6f2df');
+  const jersey = ctx.createLinearGradient(-17, -12, 17, 8);
+  jersey.addColorStop(0, home ? '#fce179' : '#bb4255');
+  jersey.addColorStop(.5, home ? '#e8b736' : '#8e2439');
+  jersey.addColorStop(1, home ? '#bd8b19' : '#5a1224');
+  rounded(ctx, -17, -14, 34, 25, 8, jersey);
+  rounded(ctx, -20, -10 + stride / 2, 7, 15, 3, '#b87f55');
+  rounded(ctx, 13, -10 - stride / 2, 7, 15, 3, '#b87f55');
+  rounded(ctx, -19, -12, 7, 7, 2, home ? '#203951' : '#e1d8ca');
+  rounded(ctx, 12, -12, 7, 7, 2, home ? '#203951' : '#e1d8ca');
+  ctx.fillStyle = home ? '#172d42' : '#fff3e5';
+  ctx.font = '900 11px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText(String(number), 0, 4);
+  const helmet = ctx.createRadialGradient(-4, -22, 1, 0, -19, 13);
+  helmet.addColorStop(0, home ? '#ffe492' : '#fffaf0');
+  helmet.addColorStop(1, home ? '#c79c28' : '#adafae');
+  ctx.fillStyle = helmet;
+  ctx.beginPath();
+  ctx.ellipse(0, -19, 11, 12, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = home ? '#142d46' : '#8c2638';
+  ctx.fillRect(-2, -31, 4, 18);
+  ctx.strokeStyle = '#182431';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-8, -27);
+  ctx.lineTo(-8, -31);
+  ctx.lineTo(8, -31);
+  ctx.lineTo(8, -27);
+  ctx.stroke();
+  if (home) {
+    ctx.fillStyle = '#713b22';
+    ctx.beginPath();
+    ctx.ellipse(17, -2, 5, 9, -.4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#f2dbc1';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(17, -7);
+    ctx.lineTo(17, 3);
+    ctx.moveTo(15, -4);
+    ctx.lineTo(19, -4);
+    ctx.moveTo(15, -1);
+    ctx.lineTo(19, -1);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+export function render(ctx, game, led, time, options = {}) {
+  const width = options.width || 1000;
+  const height = options.height || 650;
+  const dpr = options.dpr || 1;
+  const reducedMotion = options.reducedMotion || false;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+  let view = views.get(ctx);
+  if (!view) {
+    view = { play: -1, lastTime: time, actors: [], camera: game.yard + 12 };
+    views.set(ctx, view);
+  }
+  const dt = Math.min(.06, Math.max(0, time - view.lastTime));
+  const blend = reducedMotion ? 1 : 1 - Math.exp(-25 * dt);
+  view.lastTime = time;
+  const changedPlay = view.play !== game.playNumber;
+  view.play = game.playNumber;
+  const snapView = changedPlay || game.phase === 'ready';
+  const cameraTarget = Math.max(10, Math.min(88, game.yard + 12));
+  view.camera = snapView ? cameraTarget : view.camera + (cameraTarget - view.camera) * blend;
+  const margin = Math.max(29, width * .075);
+  const fieldWidth = width - 2 * margin;
+  const yardsToPixels = height / 37;
+  const yardY = yard => height * .43 - (yard - view.camera) * yardsToPixels;
+  const laneX = lane => margin + fieldWidth * (.13 + lane * .185);
+  const scale = Math.max(.52, Math.min(.95, width / 700, height / 480));
+  ctx.fillStyle = led ? '#060c08' : '#243a2a';
+  ctx.fillRect(0, 0, width, height);
+
+  // Sideline details remain outside the playable field.
+  for (let row = 0; row < height / 13; row++) {
+    for (let col = 0; col < 3; col++) {
+      ctx.fillStyle = ['#cfba80', '#8c293b', '#233e5b', '#e8e1cb', '#738a77'][(row * 7 + col * 3) % 5];
+      ctx.fillRect(4 + col * 7, row * 13 + (col % 2) * 4, 4, 5);
+      ctx.fillRect(width - 8 - col * 7, row * 13 + (col % 2) * 4, 4, 5);
+    }
+  }
+  ctx.fillStyle = led ? '#19231b' : '#d2d5c4';
+  ctx.fillRect(margin - 8, 0, 5, height);
+  ctx.fillRect(width - margin + 3, 0, 5, height);
+  ctx.fillStyle = '#ffffff19';
+  ctx.fillRect(margin - 17, height * .3, 5, height * .28);
+  ctx.fillRect(width - margin + 12, height * .3, 5, height * .28);
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(margin, 0, fieldWidth, height);
+  ctx.clip();
+  ctx.fillStyle = led ? '#0b160f' : '#315f32';
+  ctx.fillRect(margin, 0, fieldWidth, height);
+  for (let yard = 0; yard < 100; yard += 5) {
+    ctx.fillStyle = led ? (yard % 10 ? '#101a12' : '#0c150f') : (yard % 10 ? '#346a38' : '#3b743d');
+    ctx.fillRect(margin, yardY(yard + 5), fieldWidth, yardsToPixels * 5 + 1);
+  }
+  // A deterministic fine turf texture; no assets or downloads required.
+  if (!led) {
+    for (let i = 0; i < 1100; i++) {
+      const tx = margin + ((i * 73.237) % fieldWidth);
+      const ty = (i * 47.131) % height;
+      ctx.fillStyle = i % 2 ? '#c0df9212' : '#071f1814';
+      ctx.fillRect(tx, ty, 1, 3);
+    }
+    const shade = ctx.createLinearGradient(margin, 0, width - margin, 0);
+    shade.addColorStop(0, '#0624124d');
+    shade.addColorStop(.5, '#ffffff00');
+    shade.addColorStop(1, '#0624124d');
+    ctx.fillStyle = shade;
+    ctx.fillRect(margin, 0, fieldWidth, height);
+  }
+  for (const end of [0, 100]) {
+    ctx.fillStyle = led ? '#24100e' : (end === 100 ? '#122c44' : '#722237');
+    ctx.fillRect(margin, end === 100 ? yardY(110) : yardY(0), fieldWidth, yardsToPixels * 10);
+    ctx.fillStyle = '#f6deb0';
+    ctx.textAlign = 'center';
+    ctx.font = `900 ${Math.max(17, width * .042)}px Arial`;
+    ctx.fillText(end === 100 ? 'GREAT LAKES' : 'IRON VALLEY', width / 2, end === 100 ? yardY(103) : yardY(-4));
+  }
+  // Painted midfield monogram.
+  ctx.save();
+  ctx.translate(width / 2, yardY(50));
+  ctx.globalAlpha = .23;
+  ctx.fillStyle = '#f8d566';
+  ctx.textAlign = 'center';
+  ctx.font = `italic 950 ${fieldWidth * .22}px Arial`;
+  ctx.fillText('GL', 0, fieldWidth * .065);
+  ctx.restore();
+  ctx.strokeStyle = led ? '#673128' : '#f0f2d9aa';
+  for (let yard = 0; yard <= 100; yard++) {
+    const py = yardY(yard);
+    if (py < -25 || py > height + 25) continue;
+    ctx.lineWidth = yard % 10 === 0 ? 2 : 1;
+    ctx.beginPath();
+    if (yard % 5 === 0) {
+      ctx.moveTo(margin, py);
+      ctx.lineTo(width - margin, py);
+    } else {
+      for (const fraction of [.025, .36, .64, .975]) {
+        const hx = margin + fieldWidth * fraction;
+        ctx.moveTo(hx - 3, py);
+        ctx.lineTo(hx + 3, py);
+      }
+    }
+    ctx.stroke();
+    if (yard % 10 === 0 && yard > 0 && yard < 100) {
+      ctx.fillStyle = led ? '#754035' : '#e8edd3cc';
+      ctx.font = `bold ${Math.max(13, Math.min(25, width * .034))}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.fillText(String(Math.min(yard, 100 - yard)), margin + fieldWidth * .065, py - 6);
+      ctx.fillText(String(Math.min(yard, 100 - yard)), margin + fieldWidth * .935, py - 6);
+    }
+  }
+  function fieldLine(yard, color) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(margin, yardY(yard));
+    ctx.lineTo(width - margin, yardY(yard));
+    ctx.stroke();
+  }
+  fieldLine(game.spot, '#66bdff');
+  fieldLine(game.target, '#f9cf49');
+  ctx.restore();
+
+  // Orange sideline first-down marker.
+  const markerY = yardY(game.target);
+  if (markerY > 0 && markerY < height) {
+    rounded(ctx, width - margin + 1, markerY - 10, 8, 20, 2, '#f07b32');
+  }
+  const actors = [{ lane: game.lane, yard: game.yard }, ...game.defenders];
+  actors.forEach((actor, index) => {
+    let current = view.actors[index];
+    // Respawned defenders are placed directly rather than flying across the pitch.
+    if (!current || snapView || Math.abs(current.yard - actor.yard) > 8) {
+      current = { lane: actor.lane, yard: actor.yard };
+    } else {
+      current.lane += (actor.lane - current.lane) * blend;
+      current.yard += (actor.yard - current.yard) * blend;
+    }
+    view.actors[index] = current;
+    const x = laneX(current.lane), y = yardY(current.yard);
+    if (y < -40 || y > height + 40) return;
+    if (index === 0) {
+      ctx.strokeStyle = '#f8d15d';
+      ctx.lineWidth = 2;
+      ctx.fillStyle = '#0c241e55';
+      ctx.beginPath();
+      ctx.ellipse(x, y + 13 * scale, 24 * scale, 11 * scale, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      if (game.phase === 'ready') {
+        ctx.fillStyle = '#f7d368';
+        ctx.beginPath();
+        ctx.moveTo(x, y - 40 * scale);
+        ctx.lineTo(x - 5 * scale, y - 49 * scale);
+        ctx.lineTo(x + 5 * scale, y - 49 * scale);
+        ctx.fill();
+        ctx.font = `bold ${Math.max(8, 10 * scale)}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.fillText('YOU', x, y + 36 * scale);
+      }
+    }
+    athlete(ctx, x, y, index === 0, index === 0 ? 22 : 40 + index, game.phase === 'live', time, scale, led, reducedMotion);
+  });
+  // Intentionally no modal, result card, or pre-snap box over the field.
 }

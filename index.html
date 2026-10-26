@@ -1,1 +1,54 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1218"><title>Old School Football</title><link rel="stylesheet" href="style.css"></head><body><main><aside><header><span class="eyebrow">HAMBONE SOFTWARE · ARCADE SPORTS</span><h1>OLD SCHOOL<br><em>FOOTBALL</em></h1><p>Small field. Big decisions.</p></header><div class="tag">THE FINAL DRIVE</div><p class="mission">Down by five. Two minutes.<br>One touchdown wins it.</p><section class="score"><div><span>HOME</span><strong id="home">14</strong></div><b>VS</b><div><span>AWAY</span><strong>19</strong></div></section><div class="clock" id="clock">2:00</div><section class="stats"><div><span>DOWN</span><b id="down">1st & 10</b></div><div><span>BALL ON</span><b id="spot">HOME 25</b></div></section><button id="snap" class="primary">▶ SNAP THE BALL</button><p id="message" role="status" aria-live="polite">Find a lane. Beat the defense.</p><div class="options"><button id="pause">Pause</button><button id="mode" aria-pressed="false">LED mode</button><button id="sound" aria-pressed="false">Sound off</button></div><details><summary>HOW TO PLAY</summary><p>Arrow keys or WASD to run. On touch, hold the direction buttons. Run toward the top end zone. Each forward step gains one yard. Four downs to gain ten yards. Defenders move on their own rhythm: cut across lanes to escape. Space snaps the ball; P pauses. This is a handheld-inspired running challenge, with no passing or kicking.</p></details><footer>BEST DRIVE <b id="best">0 yards</b><button id="restart">Restart challenge</button></footer></aside><section class="stadium"><div class="field-top"><span>HOME FIELD</span><span id="live">READY TO PLAY</span><span>↑ ATTACK</span></div><canvas id="field" width="650" height="850" aria-label="Football field. Use arrow keys or the direction buttons to run."></canvas><div class="controls" aria-label="Direction controls"><button data-dir="up" aria-label="Run forward">▲</button><div><button data-dir="left" aria-label="Run left">◀</button><button data-dir="down" aria-label="Run backward">▼</button><button data-dir="right" aria-label="Run right">▶</button></div></div><p class="hint">READ THE GAP · MAKE YOUR CUT · KEEP MOVING</p></section></main><script type="module" src="js/main.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101b27">
+  <meta name="description" content="Old School Football: a handheld-inspired running game with a college football broadcast presentation.">
+  <title>Old School Football · Saturday Football</title>
+  <link rel="stylesheet" href="style.css?v=0.2">
+</head>
+<body>
+  <main class="app">
+    <header class="masthead">
+      <div class="brand"><span class="network-mark">HBN</span><div><h1>OLD SCHOOL FOOTBALL</h1><span class="edition">SATURDAY FOOTBALL / THE FINAL DRIVE</span></div></div>
+      <nav aria-label="Game settings"><button id="pause">Pause</button><button id="settings-toggle" aria-expanded="false" aria-controls="settings">Settings</button></nav>
+    </header>
+    <section class="scorebug" aria-label="Scoreboard">
+      <div class="team home"><span class="crest">GL</span><div class="team-name"><small>HOME</small><b>GREAT LAKES</b></div><strong id="home">14</strong><span class="possession" title="Possession">◀</span></div>
+      <div class="team away"><span class="crest">IV</span><div class="team-name"><small>AWAY</small><b>IRON VALLEY</b></div><strong>19</strong></div>
+      <div class="game-time"><span>4TH</span><b id="clock">2:00</b></div>
+      <div class="down-box"><b id="down">1st & 10</b><span id="spot">GL 25</span></div>
+    </section>
+    <section class="field-wrap" aria-label="Football field">
+      <canvas id="field" aria-label="Great Lakes ball carrier and Iron Valley defenders. Attack toward the top end zone using arrow keys or the direction buttons."></canvas>
+    </section>
+    <section class="play-strip" aria-label="Play status">
+      <span class="phase" id="live">PRE-SNAP</span>
+      <p id="message" role="status" aria-live="polite">Read the defense. The formation you see is the formation you play.</p>
+      <span class="attack-label">ATTACK ↑</span>
+    </section>
+    <section class="control-deck" aria-label="Game controls">
+      <div class="drive-note"><span class="eyebrow">THE FINAL DRIVE</span><b>One touchdown wins.</b><span>Down five. Make every cut count.</span><small>BEST DRIVE <strong id="best">0 yards</strong></small></div>
+      <div class="play-controls">
+        <div class="dpad" aria-label="Direction controls">
+          <button data-dir="up" class="up" aria-label="Run forward">▲</button>
+          <button data-dir="left" class="left" aria-label="Run left">◀</button>
+          <span class="dpad-center" aria-hidden="true">✚</span>
+          <button data-dir="right" class="right" aria-label="Run right">▶</button>
+          <button data-dir="down" class="down" aria-label="Run backward">▼</button>
+        </div>
+        <div class="snap-control"><button id="snap" class="snap"><span class="snap-icon">▶</span><span id="snap-label">SNAP BALL</span></button><span id="control-hint">READ THE DEFENSE · THEN SNAP</span></div>
+      </div>
+      <div class="legend"><span><i class="los"></i>Line of scrimmage</span><span><i class="first"></i>First-down marker</span><span>ARROWS / WASD · SPACE TO SNAP</span></div>
+    </section>
+    <section id="settings" class="settings" hidden aria-label="Game settings">
+      <div class="settings-heading"><b>GAME SETTINGS</b><button id="settings-close" aria-label="Close settings">✕</button></div>
+      <div class="setting-actions"><button id="mode" aria-pressed="false">LED mode</button><button id="sound" aria-pressed="false">Sound off</button><button id="restart">Restart challenge</button></div>
+      <p>Hold a direction to run. Four downs to gain ten yards. Reach the top end zone before the live-play clock expires. The clock stops between plays. P pauses; Space snaps.</p>
+      <p>Blue marks the snap position. Gold marks the first down. Your runner wears maize and has a selection ring. This is a running-only arcade challenge.</p>
+    </section>
+  </main>
+  <script type="module" src="js/main.js?v=0.2"></script>
+</body>
+</html>
