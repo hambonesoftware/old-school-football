@@ -143,6 +143,7 @@ export class Game {
   finish() {
     if (this.phase !== 'live') return;
     this.yard = Math.max(0, Math.min(100, Math.round(this.yard)));
+    this.gained = Math.max(this.gained, this.yard - 25);
     const gain = this.yard - this.spot;
     this.spot = this.yard;
     if (this.spot >= this.target) {

@@ -183,3 +183,12 @@ test('tackle prepares a stable new formation before the next snap', () => {
   g.snap();
   assert.deepEqual(g.defenders, upcoming);
 });
+
+test('best drive records the rounded yards awarded at a tackle', () => {
+  const g = new Game(() => .9);
+  g.snap();
+  g.yard = 29.8;
+  g.finish();
+  assert.equal(g.spot, 30);
+  assert.equal(g.gained, 5);
+});
