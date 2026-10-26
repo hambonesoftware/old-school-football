@@ -1,5 +1,8 @@
+import { BALANCE } from './tuning.js?v=0.4';
+
 export class Game {
-  constructor(random = Math.random) {
+  constructor(random = Math.random, tuning = BALANCE) {
+    this.tuning = tuning;
     this.random = random;
     this.reset();
   }
@@ -19,7 +22,8 @@ export class Game {
     this.yard = this.spot;
     this.defenders = [];
     for (let i = 0; i < 6; i++) {
-      this.defenders.push({ lane: Math.floor(this.random() * 5), yard: this.spot + 5 + i * 4 });
+      const lane = i === 0 && this.tuning.frontCenterChance > 0 && this.random() < this.tuning.frontCenterChance ? 2 : Math.floor(this.random() * 5);
+      this.defenders.push({ lane, yard: this.spot + this.tuning.firstDefenderGap + i * 4 });
     }
     this.tick = 0;
     this.steps = 0;
@@ -95,14 +99,14 @@ export class Game {
       return;
     }
     this.tick += dt;
-    const interval = .60 - Math.min(.14, (this.yard - 25) * .0018);
+    const interval = this.tuning.defenderBaseSeconds - Math.min(this.tuning.defenderMaxRampSeconds, Math.max(0, this.yard - 25) * this.tuning.defenderRampPerYard);
     while (this.tick >= interval && this.phase === 'live') {
       this.tick -= interval;
       for (const d of this.defenders) {
         if (d.yard < this.yard - 5) {
           d.yard = this.yard + 14 + Math.floor(this.random() * 10);
           d.lane = Math.floor(this.random() * 5);
-        } else if (this.random() < .64 && d.lane !== this.lane) {
+        } else if (this.random() < this.tuning.defenderChaseChance && d.lane !== this.lane) {
           d.lane += Math.sign(this.lane - d.lane);
         } else {
           d.yard += Math.sign(this.yard - d.yard);

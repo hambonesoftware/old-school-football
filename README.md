@@ -36,3 +36,6 @@ Best-drive yards are stored in this browser when storage is available. Clearing 
 The player-model.js module adapts the beveled rectangular construction used in Faces & Heels: broad shoulder blocks, articulated arms and legs, shaded faces, block helmets, facemasks, cleats, jersey numbers and a tucked football. Models are projected into a bounded cache of local Canvas sprites; no WebGL dependency or external assets are required. Player and camera interpolation is gentler while input cadence, collisions and rules stay the same. The camera includes more space ahead for the taller figures.
 
 Twelve automated tests cover rules, formation stability, block geometry and animated rig validity. Desktop and 390-pixel phone layouts were visually checked in the browser.
+
+## v0.4 — Pace and balance
+Runner movement is 150 ms per step. Defense acts a little faster and starts with closer visible pressure. Read [the ten-game balance report](docs/balance-10-games.md) for the automated results, limits, sources and reproduction steps. The simulation uses the browser’s shared movement clock.

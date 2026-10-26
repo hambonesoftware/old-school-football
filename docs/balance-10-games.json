@@ -1,0 +1,409 @@
+{
+  "method": "Ten paired seeded games per configuration. 120 Hz engine updates, shared held-input cadence; visible-state policies with 200/320 ms observation delays. Bots do not represent human skill or perceived fun.",
+  "baseline": {
+    "tuning": {
+      "playerStepSeconds": 0.17,
+      "defenderBaseSeconds": 0.6,
+      "defenderMaxRampSeconds": 0.14,
+      "defenderRampPerYard": 0.0018,
+      "defenderChaseChance": 0.64,
+      "firstDefenderGap": 5,
+      "frontCenterChance": 0
+    },
+    "games": [
+      {
+        "seed": 101,
+        "style": "straight",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 11.61,
+        "plays": 9,
+        "cuts": 0,
+        "firstDowns": 6,
+        "tackles": 8,
+        "gains": [
+          11,
+          11,
+          7,
+          5,
+          12,
+          4,
+          12,
+          11
+        ]
+      },
+      {
+        "seed": 202,
+        "style": "straight",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 11.44,
+        "plays": 10,
+        "cuts": 0,
+        "firstDowns": 5,
+        "tackles": 9,
+        "gains": [
+          11,
+          4,
+          9,
+          9,
+          12,
+          5,
+          7,
+          9,
+          7
+        ]
+      },
+      {
+        "seed": 303,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 14.6,
+        "plays": 4,
+        "cuts": 12,
+        "firstDowns": 3,
+        "tackles": 3,
+        "gains": [
+          12,
+          15,
+          46
+        ]
+      },
+      {
+        "seed": 404,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 13.5,
+        "plays": 8,
+        "cuts": 9,
+        "firstDowns": 4,
+        "tackles": 7,
+        "gains": [
+          9,
+          9,
+          22,
+          9,
+          5,
+          5,
+          8
+        ]
+      },
+      {
+        "seed": 505,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 14.36,
+        "plays": 6,
+        "cuts": 12,
+        "firstDowns": 3,
+        "tackles": 5,
+        "gains": [
+          11,
+          5,
+          5,
+          36,
+          9
+        ]
+      },
+      {
+        "seed": 606,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 12.77,
+        "plays": 9,
+        "cuts": 6,
+        "firstDowns": 5,
+        "tackles": 8,
+        "gains": [
+          7,
+          11,
+          15,
+          11,
+          8,
+          5,
+          8,
+          8
+        ]
+      },
+      {
+        "seed": 707,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 16.18,
+        "plays": 4,
+        "cuts": 19,
+        "firstDowns": 2,
+        "tackles": 3,
+        "gains": [
+          30,
+          33,
+          9
+        ]
+      },
+      {
+        "seed": 808,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 14.84,
+        "plays": 6,
+        "cuts": 15,
+        "firstDowns": 3,
+        "tackles": 5,
+        "gains": [
+          13,
+          39,
+          8,
+          5,
+          8
+        ]
+      },
+      {
+        "seed": 909,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 14.53,
+        "plays": 7,
+        "cuts": 13,
+        "firstDowns": 4,
+        "tackles": 6,
+        "gains": [
+          13,
+          28,
+          15,
+          5,
+          5,
+          8
+        ]
+      },
+      {
+        "seed": 1010,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 15.43,
+        "plays": 6,
+        "cuts": 17,
+        "firstDowns": 4,
+        "tackles": 5,
+        "gains": [
+          5,
+          9,
+          12,
+          27,
+          15
+        ]
+      }
+    ],
+    "summary": {
+      "games": 10,
+      "wins": 10,
+      "meanYards": 75,
+      "meanLiveSeconds": 13.9,
+      "meanPlays": 6.9
+    }
+  },
+  "updated": {
+    "tuning": {
+      "playerStepSeconds": 0.15,
+      "defenderBaseSeconds": 0.56,
+      "defenderMaxRampSeconds": 0.11,
+      "defenderRampPerYard": 0.0015,
+      "defenderChaseChance": 0.64,
+      "firstDefenderGap": 2,
+      "frontCenterChance": 0.75
+    },
+    "games": [
+      {
+        "seed": 101,
+        "style": "straight",
+        "result": "downs",
+        "yards": 8,
+        "liveSeconds": 0.6,
+        "plays": 4,
+        "cuts": 0,
+        "firstDowns": 0,
+        "tackles": 4,
+        "gains": [
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "seed": 202,
+        "style": "straight",
+        "result": "downs",
+        "yards": 8,
+        "liveSeconds": 0.6,
+        "plays": 4,
+        "cuts": 0,
+        "firstDowns": 0,
+        "tackles": 4,
+        "gains": [
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "seed": 303,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 11.85,
+        "plays": 6,
+        "cuts": 9,
+        "firstDowns": 5,
+        "tackles": 5,
+        "gains": [
+          13,
+          23,
+          13,
+          12,
+          13
+        ]
+      },
+      {
+        "seed": 404,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 12.96,
+        "plays": 4,
+        "cuts": 15,
+        "firstDowns": 3,
+        "tackles": 3,
+        "gains": [
+          38,
+          19,
+          11
+        ]
+      },
+      {
+        "seed": 505,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 12.97,
+        "plays": 6,
+        "cuts": 16,
+        "firstDowns": 4,
+        "tackles": 5,
+        "gains": [
+          13,
+          15,
+          18,
+          6,
+          8
+        ]
+      },
+      {
+        "seed": 606,
+        "style": "reactive",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 12.5,
+        "plays": 5,
+        "cuts": 13,
+        "firstDowns": 3,
+        "tackles": 4,
+        "gains": [
+          33,
+          12,
+          9,
+          14
+        ]
+      },
+      {
+        "seed": 707,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 13.09,
+        "plays": 6,
+        "cuts": 17,
+        "firstDowns": 3,
+        "tackles": 5,
+        "gains": [
+          19,
+          16,
+          6,
+          15,
+          8
+        ]
+      },
+      {
+        "seed": 808,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 14.52,
+        "plays": 7,
+        "cuts": 26,
+        "firstDowns": 5,
+        "tackles": 6,
+        "gains": [
+          12,
+          16,
+          6,
+          16,
+          13,
+          11
+        ]
+      },
+      {
+        "seed": 909,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 13.02,
+        "plays": 8,
+        "cuts": 16,
+        "firstDowns": 4,
+        "tackles": 7,
+        "gains": [
+          10,
+          9,
+          6,
+          6,
+          25,
+          6,
+          7
+        ]
+      },
+      {
+        "seed": 1010,
+        "style": "reader",
+        "result": "touchdown",
+        "yards": 75,
+        "liveSeconds": 13.53,
+        "plays": 5,
+        "cuts": 18,
+        "firstDowns": 4,
+        "tackles": 4,
+        "gains": [
+          12,
+          19,
+          20,
+          19
+        ]
+      }
+    ],
+    "summary": {
+      "games": 10,
+      "wins": 8,
+      "meanYards": 61.6,
+      "meanLiveSeconds": 10.6,
+      "meanPlays": 5.5
+    }
+  }
+}

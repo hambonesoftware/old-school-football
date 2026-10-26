@@ -22,7 +22,7 @@ test('tackle prepares next snap formation immediately and it remains stable',()=
  const g=new Game(()=>((calls++%5)/5));
  g.snap();g.yard=32;g.finish();
  assert.equal(g.phase,'ready');assert.equal(g.yard,32);assert.equal(g.lane,2);
- assert.equal(g.defenders[0].yard,37);
+ assert.equal(g.defenders[0].yard,34);
  const upcoming=structuredClone(g.defenders);
  g.update(30);g.move('up');
  assert.deepEqual(g.defenders,upcoming);assert.equal(g.yard,32);

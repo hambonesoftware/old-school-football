@@ -1,5 +1,7 @@
-import { Game } from './engine.js?v=0.3.1';
-import { render } from './renderer.js?v=0.3.1';
+import { BALANCE } from './tuning.js?v=0.4';
+import { MovementClock } from './movement.js?v=0.4';
+import { Game } from './engine.js?v=0.4';
+import { render } from './renderer.js?v=0.4';
 
 const game = new Game();
 const $ = id => document.getElementById(id);
@@ -7,7 +9,8 @@ const canvas = $('field');
 const ctx = canvas.getContext('2d');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let led = false, sound = false, audio, held = null, activePointer = null;
-let nextMove = 0, last = performance.now(), best = 0, priorPhase = 'ready';
+const movement = new MovementClock(BALANCE.playerStepSeconds);
+let last = performance.now(), best = 0, priorPhase = 'ready';
 let width = 1000, height = 650, dpr = 1, lastHud = '';
 try { best = Number(localStorage.getItem('old-school-football-best')) || 0; } catch {}
 
@@ -41,12 +44,14 @@ function beep() {
 
 function release() {
   held = null;
+  movement.cancel();
   activePointer = null;
   for (const button of document.querySelectorAll('[data-dir]')) button.classList.remove('held');
 }
 function snap() {
   release();
   game.snap();
+  movement.reset();
   beep();
 }
 function pause() {
@@ -89,8 +94,8 @@ const keys = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 
 function start(direction) {
   if (game.phase !== 'live' || !$('settings').hidden) return;
   held = direction;
-  game.move(direction);
-  nextMove = performance.now() + 170;
+  movement.press(direction);
+  movement.advance(0, direction => game.move(direction));
   document.querySelector(`[data-dir="${direction}"]`)?.classList.add('held');
 }
 window.addEventListener('keydown', event => {
@@ -109,7 +114,10 @@ window.addEventListener('keydown', event => {
   if (event.key.toLowerCase() === 'p' && !event.repeat) pause();
 });
 window.addEventListener('keyup', event => {
-  if ((keys[event.key] || keys[event.key.toLowerCase()]) === held) release();
+  if ((keys[event.key] || keys[event.key.toLowerCase()]) === held) {
+    held = null; movement.release();
+    for (const button of document.querySelectorAll('[data-dir]')) button.classList.remove('held');
+  }
 });
 window.addEventListener('blur', () => { release(); if (game.phase === 'live') pause(); });
 document.addEventListener('visibilitychange', () => {
@@ -124,11 +132,22 @@ for (const button of document.querySelectorAll('[data-dir]')) {
     start(button.dataset.dir);
   });
   for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) {
-    button.addEventListener(name, event => { if (activePointer === event.pointerId) release(); });
+    button.addEventListener(name, event => {
+      if (activePointer === event.pointerId) {
+        held=null; activePointer=null; movement.release();
+        button.classList.remove('held');
+      }
+    });
   }
   button.addEventListener('contextmenu', event => event.preventDefault());
   // Native keyboard activation of a direction button takes one step.
-  button.addEventListener('click', event => { if (event.detail === 0) game.move(button.dataset.dir); });
+  button.addEventListener('click', event => {
+    if (event.detail === 0 && game.phase === 'live' && $('settings').hidden) {
+      movement.press(button.dataset.dir);
+      movement.advance(0, direction => game.move(direction));
+      movement.release();
+    }
+  });
 }
 
 function updateHud() {
@@ -153,7 +172,7 @@ function updateHud() {
 function frame(now) {
   const dt = Math.min(.05, (now - last) / 1000);
   last = now;
-  if (held && now >= nextMove) { game.move(held); nextMove = now + 170; }
+  if (game.phase === 'live') movement.advance(dt, direction => game.move(direction));
   game.update(dt);
   if (game.phase !== priorPhase) {
     if (game.phase === 'ready' || game.phase === 'over') { release(); beep(); }
