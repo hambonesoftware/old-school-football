@@ -38,7 +38,9 @@ export function buildFootballModel({ home = true, number = 22, cycle = 0, runnin
   const faces = [];
   const rotation = p => [p[0]*Math.cos(yaw)+p[2]*Math.sin(yaw), p[1], -p[0]*Math.sin(yaw)+p[2]*Math.cos(yaw)];
   const bounce = running ? Math.abs(Math.sin(cycle))* .07 : 0;
-  const rotate = p => rotation(add(p, [0, bounce, 0]));
+  // Chibi proportions: compress the legs most, retain broad torsos and big helmets.
+  const proportion = p => [p[0], p[1] <= 1.75 ? p[1] * .64 : 1.12 + (p[1] - 1.75) * .88, p[2]];
+  const rotate = p => rotation(add(proportion(p), [0, bounce * .65, 0]));
   function block(center, size, color, bevel = .045, transform = p => p) {
     const mesh = bevelGeometry(center, size, bevel);
     const vertices = mesh.vertices.map(p => rotate(transform(p)));
@@ -94,15 +96,15 @@ export function buildFootballModel({ home = true, number = 22, cycle = 0, runnin
     }
   }
   // Large chamfered helmet, center stripe, dark face opening and separate cage bars.
-  block([0,3.08,0],[.80,.78,.73],colors.helmet,.115);
-  block([0,3.48,-.01],[.095,.055,.55],colors.trim,.012);
-  block([0,3.18,-.37],[.095,.40,.025],colors.trim,.009);
-  block([0,3.08,.365],[.61,.32,.045],'#27323a',.028);
-  block([0,3.07,.397],[.44,.18,.02],colors.skin,.015);
-  block([0,2.90,.445],[.65,.055,.065],colors.trim,.012);
-  block([0,3.02,.445],[.65,.045,.065],colors.trim,.01);
-  for (const x of [-.29,0,.29]) block([x,2.97,.445],[.035,.20,.045],colors.trim,.008);
-  for (const side of [-1,1]) block([side*.40,3.0,0],[.055,.27,.29],colors.trim,.025);
+  block([0,3.17,0],[1.08,1.00,.96],colors.helmet,.13);
+  block([0,3.68,-.01],[.12,.055,.74],colors.trim,.012);
+  block([0,3.20,-.49],[.12,.55,.025],colors.trim,.009);
+  block([0,3.10,.49],[.83,.36,.045],'#27323a',.028);
+  block([0,3.09,.52],[.62,.21,.02],colors.skin,.015);
+  block([0,2.89,.575],[.86,.06,.07],colors.trim,.012);
+  block([0,3.03,.575],[.86,.05,.07],colors.trim,.01);
+  for (const x of [-.39,0,.39]) block([x,2.97,.575],[.04,.23,.05],colors.trim,.008);
+  for (const side of [-1,1]) block([side*.54,3.03,0],[.055,.34,.38],colors.trim,.025);
   // Geometry-based jersey numbers remain upright on the body for either team.
   for (const z of [-.337,.337]) {
     for (const [index, digit] of String(number).split('').entries()) {
@@ -170,6 +172,7 @@ export function drawFootballPlayer(ctx, { x,y,home,number,running,time,scale,led
     const phase = running && !reducedMotion ? Math.floor((time*2.1+number*.13)*16)%16 : 0;
     const direction = ((Math.round(yaw/(Math.PI/4))%8)+8)%8;
     const image = sprite(home,number,phase,direction,running&&!reducedMotion);
+    scale *= 1.13;
     ctx.drawImage(image,-64*scale,-112*scale,128*scale,144*scale);
   }
   ctx.restore();

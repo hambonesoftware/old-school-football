@@ -15,3 +15,11 @@ button:hover{filter:brightness(1.15)}button:focus-visible{outline:3px solid var(
 @media(max-width:540px){.app{min-height:560px}.masthead{padding:8px 10px;gap:7px}.brand{gap:7px}.network-mark{font-size:16px;padding:8px 6px}h1{font-size:10px;letter-spacing:.9px;margin-bottom:3px}.edition{font-size:6px;letter-spacing:1px}nav{gap:4px}nav button{font-size:10px;padding:7px;min-height:36px}.scorebug{grid-template-columns:1fr 1fr 69px;grid-template-rows:62px 25px;border-bottom-width:2px}.team{padding:7px 11px;gap:7px;border-left-width:3px!important}.crest{font-size:23px}.team-name b{font-size:9px;letter-spacing:0;max-width:60px}.team-name small{font-size:7px;letter-spacing:1px}.team strong{font-size:30px}.possession{right:3px;font-size:7px}.game-time b{font-size:25px}.game-time span{font-size:8px}.down-box{grid-column:1/-1;flex-direction:row;gap:20px}.down-box b{font-size:13px}.down-box span{font-size:9px}.play-strip{gap:8px;padding:8px 12px;min-height:45px}.phase{font-size:8px;min-width:58px;letter-spacing:.7px}.play-strip p{font-size:10px}.attack-label{display:none}.control-deck{padding:10px 10px 12px}.play-controls{gap:27px}.snap{width:146px;height:62px;font-size:15px}.legend{display:none}.settings{top:58px}.field-wrap{min-height:220px}#control-hint{font-size:7px;letter-spacing:.5px}}
 @media(max-height:550px) and (min-width:541px){.app{min-height:360px}.masthead{padding:5px 12px}.edition,.drive-note,.legend{display:none}.scorebug{min-height:55px}.team{padding:5px 15px}.team strong{font-size:29px}.game-time b{font-size:24px}.control-deck{padding:5px 10px}.dpad{grid-template-columns:40px 34px 40px;grid-template-rows:28px 24px 28px}.snap{height:52px}.field-wrap{min-height:150px}.play-strip{min-height:32px;padding:5px 12px}}
 @media(prefers-reduced-motion:reduce){button{scroll-behavior:auto}}
+
+/* Split touch controls so each thumb has its own edge of the screen. */
+.control-deck{position:relative}
+.play-controls{flex:1;min-width:0;justify-content:space-between}
+.drive-note{position:absolute;left:50%;transform:translateX(-50%);max-width:calc(100% - 430px);align-items:center;text-align:center;pointer-events:none}
+.snap-control{align-items:flex-end}
+.legend{display:none}
+@media(max-width:800px){.drive-note{display:none}}
