@@ -1,4 +1,4 @@
-# Old School Football — v0.2
+# Old School Football — v0.3
 An original browser running challenge inspired by red LED handheld football, with a striped field and small animated football players. No third-party assets, dependencies, accounts, analytics, or external requests.
 
 ## Play
@@ -31,3 +31,8 @@ Best-drive yards are stored in this browser when storage is available. Clearing 
 - Smooth visual movement, device-pixel-ratio-aware rendering and reduced-motion support.
 - Settings are opened explicitly and pause a live play.
 - Nine engine tests cover the original rules and formation-preview regressions.
+
+## v0.3 — Block football figures and smoother motion
+The player-model.js module adapts the beveled rectangular construction used in Faces & Heels: broad shoulder blocks, articulated arms and legs, shaded faces, block helmets, facemasks, cleats, jersey numbers and a tucked football. Models are projected into a bounded cache of local Canvas sprites; no WebGL dependency or external assets are required. Player and camera interpolation is gentler while input cadence, collisions and rules stay the same. The camera includes more space ahead for the taller figures.
+
+Twelve automated tests cover rules, formation stability, block geometry and animated rig validity. Desktop and 390-pixel phone layouts were visually checked in the browser.

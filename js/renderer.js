@@ -1,3 +1,5 @@
+import { drawFootballPlayer } from './player-model.js?v=0.3';
+
 // Presentation state only. Interpolation never changes the rules or collision cells.
 const views = new WeakMap();
 
@@ -6,77 +8,6 @@ function rounded(ctx, x, y, width, height, radius, fill) {
   ctx.beginPath();
   ctx.roundRect(x, y, width, height, radius);
   ctx.fill();
-}
-
-function athlete(ctx, x, y, home, number, running, time, scale, led, reducedMotion) {
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.scale(scale, scale);
-  if (led) {
-    ctx.fillStyle = home ? '#ff8158' : '#ff3128';
-    ctx.shadowColor = ctx.fillStyle;
-    ctx.shadowBlur = home ? 20 : 9;
-    ctx.fillRect(-12, -7, 24, 14);
-    ctx.restore();
-    return;
-  }
-  if (!home) ctx.rotate(Math.PI);
-  const stride = running && !reducedMotion ? Math.sin(time * 17 + number) * 4 : 0;
-  ctx.fillStyle = '#04140770';
-  ctx.beginPath();
-  ctx.ellipse(4, 10, 18, 9, 0, 0, Math.PI * 2);
-  ctx.fill();
-  rounded(ctx, -10, 0, 8, 17 + stride, 3, home ? '#122b42' : '#e8dfd2');
-  rounded(ctx, 2, 0, 8, 17 - stride, 3, home ? '#122b42' : '#e8dfd2');
-  rounded(ctx, -11, 12 + stride, 9, 6, 2, '#f6f2df');
-  rounded(ctx, 2, 12 - stride, 9, 6, 2, '#f6f2df');
-  const jersey = ctx.createLinearGradient(-17, -12, 17, 8);
-  jersey.addColorStop(0, home ? '#fce179' : '#bb4255');
-  jersey.addColorStop(.5, home ? '#e8b736' : '#8e2439');
-  jersey.addColorStop(1, home ? '#bd8b19' : '#5a1224');
-  rounded(ctx, -17, -14, 34, 25, 8, jersey);
-  rounded(ctx, -20, -10 + stride / 2, 7, 15, 3, '#b87f55');
-  rounded(ctx, 13, -10 - stride / 2, 7, 15, 3, '#b87f55');
-  rounded(ctx, -19, -12, 7, 7, 2, home ? '#203951' : '#e1d8ca');
-  rounded(ctx, 12, -12, 7, 7, 2, home ? '#203951' : '#e1d8ca');
-  ctx.fillStyle = home ? '#172d42' : '#fff3e5';
-  ctx.font = '900 11px Arial';
-  ctx.textAlign = 'center';
-  ctx.fillText(String(number), 0, 4);
-  const helmet = ctx.createRadialGradient(-4, -22, 1, 0, -19, 13);
-  helmet.addColorStop(0, home ? '#ffe492' : '#fffaf0');
-  helmet.addColorStop(1, home ? '#c79c28' : '#adafae');
-  ctx.fillStyle = helmet;
-  ctx.beginPath();
-  ctx.ellipse(0, -19, 11, 12, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = home ? '#142d46' : '#8c2638';
-  ctx.fillRect(-2, -31, 4, 18);
-  ctx.strokeStyle = '#182431';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(-8, -27);
-  ctx.lineTo(-8, -31);
-  ctx.lineTo(8, -31);
-  ctx.lineTo(8, -27);
-  ctx.stroke();
-  if (home) {
-    ctx.fillStyle = '#713b22';
-    ctx.beginPath();
-    ctx.ellipse(17, -2, 5, 9, -.4, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = '#f2dbc1';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(17, -7);
-    ctx.lineTo(17, 3);
-    ctx.moveTo(15, -4);
-    ctx.lineTo(19, -4);
-    ctx.moveTo(15, -1);
-    ctx.lineTo(19, -1);
-    ctx.stroke();
-  }
-  ctx.restore();
 }
 
 export function render(ctx, game, led, time, options = {}) {
@@ -88,23 +19,23 @@ export function render(ctx, game, led, time, options = {}) {
   ctx.clearRect(0, 0, width, height);
   let view = views.get(ctx);
   if (!view) {
-    view = { play: -1, lastTime: time, actors: [], camera: game.yard + 12 };
+    view = { play: -1, lastTime: time, actors: [], camera: game.yard + 15.5 };
     views.set(ctx, view);
   }
   const dt = Math.min(.06, Math.max(0, time - view.lastTime));
-  const blend = reducedMotion ? 1 : 1 - Math.exp(-25 * dt);
+  const blend = reducedMotion ? 1 : 1 - Math.exp(-18 * dt);
   view.lastTime = time;
   const changedPlay = view.play !== game.playNumber;
   view.play = game.playNumber;
   const snapView = changedPlay || game.phase === 'ready';
-  const cameraTarget = Math.max(10, Math.min(88, game.yard + 12));
+  const cameraTarget = Math.max(10, Math.min(88, game.yard + 15.5));
   view.camera = snapView ? cameraTarget : view.camera + (cameraTarget - view.camera) * blend;
   const margin = Math.max(29, width * .075);
   const fieldWidth = width - 2 * margin;
   const yardsToPixels = height / 37;
   const yardY = yard => height * .43 - (yard - view.camera) * yardsToPixels;
   const laneX = lane => margin + fieldWidth * (.13 + lane * .185);
-  const scale = Math.max(.52, Math.min(.95, width / 700, height / 480));
+  const scale = Math.max(.65, Math.min(1.12, width / 650, height / 410));
   ctx.fillStyle = led ? '#060c08' : '#243a2a';
   ctx.fillRect(0, 0, width, height);
 
@@ -231,16 +162,16 @@ export function render(ctx, game, led, time, options = {}) {
       if (game.phase === 'ready') {
         ctx.fillStyle = '#f7d368';
         ctx.beginPath();
-        ctx.moveTo(x, y - 40 * scale);
-        ctx.lineTo(x - 5 * scale, y - 49 * scale);
-        ctx.lineTo(x + 5 * scale, y - 49 * scale);
+        ctx.moveTo(x, y - 69 * scale);
+        ctx.lineTo(x - 5 * scale, y - 78 * scale);
+        ctx.lineTo(x + 5 * scale, y - 78 * scale);
         ctx.fill();
         ctx.font = `bold ${Math.max(8, 10 * scale)}px Arial`;
         ctx.textAlign = 'center';
         ctx.fillText('YOU', x, y + 36 * scale);
       }
     }
-    athlete(ctx, x, y, index === 0, index === 0 ? 22 : 40 + index, game.phase === 'live', time, scale, led, reducedMotion);
+    drawFootballPlayer(ctx, { x, y, home: index === 0, number: index === 0 ? 22 : 40 + index, running: game.phase === 'live', time, scale, led, reducedMotion, yaw: index === 0 ? 0 : Math.PI });
   });
   // Intentionally no modal, result card, or pre-snap box over the field.
 }

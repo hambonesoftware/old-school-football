@@ -1,5 +1,5 @@
-import { Game } from './engine.js?v=0.2';
-import { render } from './renderer.js?v=0.2';
+import { Game } from './engine.js?v=0.3';
+import { render } from './renderer.js?v=0.3';
 
 const game = new Game();
 const $ = id => document.getElementById(id);
