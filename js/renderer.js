@@ -1,4 +1,4 @@
-import { drawFootballPlayer } from './player-model.js?v=0.3.1';
+import { drawFootballPlayer } from './player-model.js?v=0.5';
 
 // Presentation state only. Interpolation never changes the rules or collision cells.
 const views = new WeakMap();
@@ -19,7 +19,7 @@ export function render(ctx, game, led, time, options = {}) {
   ctx.clearRect(0, 0, width, height);
   let view = views.get(ctx);
   if (!view) {
-    view = { play: -1, lastTime: time, actors: [], camera: game.yard + 15.5 };
+    view = { play: -1, lastTime: time, actors: [], camera: game.yard };
     views.set(ctx, view);
   }
   const dt = Math.min(.06, Math.max(0, time - view.lastTime));
@@ -28,12 +28,20 @@ export function render(ctx, game, led, time, options = {}) {
   const changedPlay = view.play !== game.playNumber;
   view.play = game.playNumber;
   const snapView = changedPlay || game.phase === 'ready';
-  const cameraTarget = Math.max(10, Math.min(88, game.yard + 15.5));
-  view.camera = snapView ? cameraTarget : view.camera + (cameraTarget - view.camera) * blend;
+  // Let the runner advance about five yards on screen before the camera follows.
+  // Separate camera damping from sprite interpolation to preserve a feeling of travel.
+  const runnerAhead = game.yard - view.camera;
+  let cameraTarget = view.camera;
+  if (runnerAhead > 5) cameraTarget = game.yard - 5;
+  if (runnerAhead < -2.5) cameraTarget = game.yard + 2.5;
+  cameraTarget = Math.max(0, Math.min(90, cameraTarget));
+  const cameraBlend = reducedMotion ? 1 : 1 - Math.exp(-dt / .20);
+  view.camera = snapView ? game.yard
+    : view.camera + (cameraTarget - view.camera) * cameraBlend;
   const margin = Math.max(29, width * .075);
   const fieldWidth = width - 2 * margin;
   const yardsToPixels = height / 37;
-  const yardY = yard => height * .43 - (yard - view.camera) * yardsToPixels;
+  const yardY = yard => height * .76 - (yard - view.camera) * yardsToPixels;
   const laneX = lane => margin + fieldWidth * (.13 + lane * .185);
   const scale = Math.max(.65, Math.min(1.12, width / 650, height / 410));
   ctx.fillStyle = led ? '#060c08' : '#243a2a';
@@ -66,9 +74,11 @@ export function render(ctx, game, led, time, options = {}) {
   }
   // A deterministic fine turf texture; no assets or downloads required.
   if (!led) {
-    for (let i = 0; i < 1100; i++) {
+    for (let i = 0; i < 3300; i++) {
       const tx = margin + ((i * 73.237) % fieldWidth);
-      const ty = (i * 47.131) % height;
+      // Turf flecks belong to a yard on the FIELD, not a fixed screen pixel.
+      const ty = yardY(-10 + ((i * 47.131) % 120));
+      if (ty < -4 || ty > height + 4) continue;
       ctx.fillStyle = i % 2 ? '#c0df9212' : '#071f1814';
       ctx.fillRect(tx, ty, 1, 3);
     }
@@ -171,7 +181,14 @@ export function render(ctx, game, led, time, options = {}) {
         ctx.fillText('YOU', x, y + 36 * scale);
       }
     }
-    drawFootballPlayer(ctx, { x, y, home: index === 0, number: index === 0 ? 22 : 40 + index, running: game.phase === 'live', time, scale, led, reducedMotion, yaw: index === 0 ? 0 : Math.PI });
+    const running = game.phase === 'live' && (index > 0 ||
+      (game.controlMode === 'arcade' ? game.runSpeed > .25 : game.movingTimer > 0));
+    drawFootballPlayer(ctx, {
+      x, y, home: index === 0, number: index === 0 ? 22 : 40 + index,
+      running, time, scale, led, reducedMotion,
+      strideDistance: index === 0 ? game.distanceTravelled : null,
+      yaw: index === 0 ? 0 : Math.PI
+    });
   });
   // Intentionally no modal, result card, or pre-snap box over the field.
 }

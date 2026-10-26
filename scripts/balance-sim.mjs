@@ -1,9 +1,9 @@
 import { MovementClock } from '../js/movement.js';
 import { Game } from '../js/engine.js';
-import { BALANCE } from '../js/tuning.js';
 import { writeFileSync } from 'node:fs';
 
 const BASELINE = { playerStepSeconds:.170,defenderBaseSeconds:.600,defenderMaxRampSeconds:.140,defenderRampPerYard:.0018,defenderChaseChance:.64,firstDefenderGap:5,frontCenterChance:0 };
+const CLASSIC_V04 = { playerStepSeconds:.150,defenderBaseSeconds:.560,defenderMaxRampSeconds:.110,defenderRampPerYard:.0015,defenderChaseChance:.64,firstDefenderGap:2,frontCenterChance:.75 };
 const cases = [
   {seed:101,style:'straight'}, {seed:202,style:'straight'},
   {seed:303,style:'reactive'}, {seed:404,style:'reactive'}, {seed:505,style:'reactive'}, {seed:606,style:'reactive'},
@@ -58,7 +58,7 @@ function choose(g,style,rng,seen) {
   return best.dir;
 }
 function play(c,tuning) {
-  const g=new Game(random(c.seed),tuning),rng=random(c.seed+9999);
+  const g=new Game(random(c.seed),tuning,'classic'),rng=random(c.seed+9999);
   const dt=1/120;
   const input=new MovementClock(tuning.playerStepSeconds);
   let elapsed=0,nextInput=0,nextReaction=0,seen=[],plays=0,cuts=0,firstDowns=0,contacts=0;
@@ -94,6 +94,6 @@ function suite(tuning) {
   const games=cases.map(c=>play(c,tuning));
   return {tuning,games,summary:{games:games.length,wins:games.filter(x=>x.result==='touchdown').length,meanYards:+(games.reduce((a,x)=>a+x.yards,0)/games.length).toFixed(1),meanLiveSeconds:+(games.reduce((a,x)=>a+x.liveSeconds,0)/games.length).toFixed(1),meanPlays:+(games.reduce((a,x)=>a+x.plays,0)/games.length).toFixed(1)}};
 }
-const result={method:'Ten paired seeded games per configuration. 120 Hz engine updates, shared held-input cadence; visible-state policies with 200/320 ms observation delays. Bots do not represent human skill or perceived fun.',baseline:suite(BASELINE),updated:suite(BALANCE)};
+const result={method:'Ten paired seeded games per configuration. 120 Hz engine updates, shared held-input cadence; visible-state policies with 200/320 ms observation delays. Bots do not represent human skill or perceived fun.',baseline:suite(BASELINE),updated:suite(CLASSIC_V04)};
 if(process.argv.includes('--save'))writeFileSync(new URL('../docs/balance-10-games.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify(result,null,2));

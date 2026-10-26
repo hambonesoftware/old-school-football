@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#101b27">
   <meta name="description" content="Old School Football: a handheld-inspired running game with a college football broadcast presentation.">
   <title>Old School Football · Saturday Football</title>
-  <link rel="stylesheet" href="style.css?v=0.4">
+  <link rel="stylesheet" href="style.css?v=0.5">
 </head>
 <body>
   <main class="app">
@@ -32,11 +32,11 @@
       <div class="drive-note"><span class="eyebrow">THE FINAL DRIVE</span><b>One touchdown wins.</b><span>Down five. Make every cut count.</span><small>BEST DRIVE <strong id="best">0 yards</strong></small></div>
       <div class="play-controls">
         <div class="dpad" aria-label="Direction controls">
-          <button data-dir="up" class="up" aria-label="Run forward">▲</button>
+          <button data-dir="up" class="up" aria-label="Hold for a running surge">▲</button>
           <button data-dir="left" class="left" aria-label="Run left">◀</button>
           <span class="dpad-center" aria-hidden="true">✚</span>
           <button data-dir="right" class="right" aria-label="Run right">▶</button>
-          <button data-dir="down" class="down" aria-label="Run backward">▼</button>
+          <button data-dir="down" class="down" aria-label="Hold to brake">▼</button>
         </div>
         <div class="snap-control"><button id="snap" class="snap"><span class="snap-icon">▶</span><span id="snap-label">SNAP BALL</span></button><span id="control-hint">READ THE DEFENSE · THEN SNAP</span></div>
       </div>
@@ -44,11 +44,11 @@
     </section>
     <section id="settings" class="settings" hidden aria-label="Game settings">
       <div class="settings-heading"><b>GAME SETTINGS</b><button id="settings-close" aria-label="Close settings">✕</button></div>
-      <div class="setting-actions"><button id="mode" aria-pressed="false">LED mode</button><button id="sound" aria-pressed="false">Sound off</button><button id="restart">Restart challenge</button></div>
-      <p>Hold a direction to run. Four downs to gain ten yards. Reach the top end zone before the live-play clock expires. The clock stops between plays. P pauses; Space snaps.</p>
+      <div class="setting-actions"><button id="control-mode">Switch to Classic steps</button><button id="mode" aria-pressed="false">LED mode</button><button id="sound" aria-pressed="false">Sound off</button><button id="restart">Restart challenge</button></div>
+      <p>Arcade mode: automatically run forward after the snap, steer with left/right, hold up to surge, or down to brake. Classic mode keeps the original step-by-step four-direction movement. Switching modes restarts the drive.</p><p>Four downs to gain ten yards. Reach the top end zone before the live-play clock expires. The clock stops between plays. P pauses; Space snaps.</p>
       <p>Blue marks the snap position. Gold marks the first down. Your runner wears maize and has a selection ring. This is a running-only arcade challenge.</p>
     </section>
   </main>
-  <script type="module" src="js/main.js?v=0.4"></script>
+  <script type="module" src="js/main.js?v=0.5"></script>
 </body>
 </html>

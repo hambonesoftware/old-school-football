@@ -1,8 +1,8 @@
-# Old School Football — v0.3
+# Old School Football — v0.5
 An original browser running challenge inspired by red LED handheld football, with a striped field and small animated football players. No third-party assets, dependencies, accounts, analytics, or external requests.
 
 ## Play
-Run toward the top end zone. Arrow keys/WASD or hold the touch direction buttons. Space snaps; P pauses. Four downs to gain ten yards. Start at your 25, down 14–19 with two minutes of live-play time. A touchdown wins. No passing, kicking, opposing possessions, or extra points in this first running-only vertical slice. Clock stops between plays. The backward button is a modern convenience; this is not an exact historical rules emulation.
+Run toward the top end zone. In the default **Arcade Run** mode, the runner automatically advances after the snap: use left/right to steer without losing forward momentum, hold up for a speed increase, and down to brake. Choose **Classic Steps** in Settings for the original four-direction one-yard stepping. Arrow keys/WASD and touch controls are supported. Space snaps; P pauses. Four downs to gain ten yards. Start at your 25, down 14–19 with two minutes of live-play time. A touchdown wins. No passing, kicking, opposing possessions, or extra points in this first running-only vertical slice. Clock stops between plays. Classic mode retains a backward direction as a modern convenience; this is not an exact historical rules emulation.
 
 ## GitHub Pages
 1. Create a repository such as `old-school-football`.
@@ -39,3 +39,14 @@ Twelve automated tests cover rules, formation stability, block geometry and anim
 
 ## v0.4 — Pace and balance
 Runner movement is 150 ms per step. Defense acts a little faster and starts with closer visible pressure. Read [the ten-game balance report](docs/balance-10-games.md) for the automated results, limits, sources and reproduction steps. The simulation uses the browser’s shared movement clock.
+
+
+## v0.5 — Continuous running and a more readable camera
+
+- Arcade Run is now the default. Forward movement is independent of left/right steering; holding up surges and holding down brakes. Movement accelerates smoothly. Classic Steps is available in Settings and retains v0.4 defensive spacing and rules; changing modes restarts the drive.
+- The camera starts the runner around 76% down the field view, allows about five yards of visible advancement before following, and uses approximately 200 ms damping. The 100-yard field and approximately 37-yard view are unchanged.
+- Fine turf texture moves with the world instead of staying fixed to screen pixels. The chibi player's running cycle is linked to traveled distance so animation cadence matches progress.
+- Arcade defenders initially line up six yards ahead, then visibly close down the gap. Their response increases with field progress; visible pre-snap formations stay authoritative.
+- The split left-edge direction pad and right-edge Snap button remain. No play-result overlay covers the field.
+- Run npm test for the automated rules and model suite. Run node scripts/arcade-balance.mjs for 200 seeded arcade games, or add --save to regenerate the committed result JSON.
+- See [the 200-game balance report](docs/arcade-balance-200.md). The simulation does not substitute for hands-on phone playtesting.

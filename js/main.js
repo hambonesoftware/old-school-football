@@ -1,7 +1,7 @@
-import { BALANCE } from './tuning.js?v=0.4';
-import { MovementClock } from './movement.js?v=0.4';
-import { Game } from './engine.js?v=0.4';
-import { render } from './renderer.js?v=0.4';
+import { BALANCE } from './tuning.js?v=0.5';
+import { MovementClock } from './movement.js?v=0.5';
+import { Game } from './engine.js?v=0.5';
+import { render } from './renderer.js?v=0.5';
 
 const game = new Game();
 const $ = id => document.getElementById(id);
@@ -78,6 +78,14 @@ $('pause').onclick = pause;
 $('restart').onclick = () => { release(); game.reset(); setSettings(false); };
 $('settings-toggle').onclick = () => setSettings($('settings').hidden);
 $('settings-close').onclick = () => setSettings(false);
+$('control-mode').onclick = () => {
+  release();
+  game.setControlMode(game.controlMode === 'arcade' ? 'classic' : 'arcade');
+  movement.reset();
+  priorPhase = game.phase;
+  lastHud = '';
+  beep();
+};
 $('mode').onclick = () => {
   led = !led;
   $('mode').setAttribute('aria-pressed', String(led));
@@ -94,8 +102,10 @@ const keys = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 
 function start(direction) {
   if (game.phase !== 'live' || !$('settings').hidden) return;
   held = direction;
-  movement.press(direction);
-  movement.advance(0, direction => game.move(direction));
+  if (game.controlMode === 'classic' || direction === 'left' || direction === 'right') {
+    movement.press(direction);
+    movement.advance(0, next => game.move(next));
+  }
   document.querySelector(`[data-dir="${direction}"]`)?.classList.add('held');
 }
 window.addEventListener('keydown', event => {
@@ -143,16 +153,18 @@ for (const button of document.querySelectorAll('[data-dir]')) {
   // Native keyboard activation of a direction button takes one step.
   button.addEventListener('click', event => {
     if (event.detail === 0 && game.phase === 'live' && $('settings').hidden) {
-      movement.press(button.dataset.dir);
-      movement.advance(0, direction => game.move(direction));
-      movement.release();
+      if (game.controlMode === 'classic' || button.dataset.dir === 'left' || button.dataset.dir === 'right') {
+        movement.press(button.dataset.dir);
+        movement.advance(0, direction => game.move(direction));
+        movement.release();
+      }
     }
   });
 }
 
 function updateHud() {
   const seconds = Math.ceil(game.time);
-  const signature = [game.phase, seconds, game.score, game.down, game.target, game.spot, game.message, best].join('|');
+  const signature = [game.phase, game.controlMode, seconds, game.score, game.down, game.target, game.spot, game.message, Math.floor(best)].join('|');
   if (signature === lastHud) return;
   lastHud = signature;
   $('home').textContent = game.score;
@@ -166,14 +178,24 @@ function updateHud() {
   $('pause').disabled = game.phase === 'ready' || game.phase === 'over';
   $('live').textContent = { ready: 'PRE-SNAP', live: '● LIVE', paused: 'PAUSED', over: game.score === 20 ? 'TOUCHDOWN' : 'FINAL' }[game.phase];
   $('live').dataset.phase = game.phase;
-  $('best').textContent = `${best} yards`;
-  $('control-hint').textContent = game.phase === 'live' ? 'HOLD A DIRECTION TO RUN' : game.phase === 'over' ? 'READY FOR ANOTHER DRIVE?' : 'READ THE DEFENSE · THEN SNAP';
+  $('best').textContent = `${Math.floor(best)} yards`;
+  $('control-hint').textContent = game.phase === 'live'
+    ? game.controlMode === 'arcade'
+      ? 'AUTO-RUN · ◀ ▶ STEER · ▲ SURGE · ▼ BRAKE'
+      : 'HOLD A DIRECTION TO RUN'
+    : game.phase === 'over' ? 'READY FOR ANOTHER DRIVE?' : 'READ THE DEFENSE · THEN SNAP';
+  $('control-mode').textContent = game.controlMode === 'arcade'
+    ? 'Switch to Classic steps' : 'Switch to Arcade run';
+  document.querySelector('[data-dir="up"]').setAttribute('aria-label',
+    game.controlMode === 'arcade' ? 'Hold for a running surge' : 'Run forward');
+  document.querySelector('[data-dir="down"]').setAttribute('aria-label',
+    game.controlMode === 'arcade' ? 'Hold to brake' : 'Run backward');
 }
 function frame(now) {
   const dt = Math.min(.05, (now - last) / 1000);
   last = now;
   if (game.phase === 'live') movement.advance(dt, direction => game.move(direction));
-  game.update(dt);
+  game.update(dt, game.controlMode === 'arcade' ? held : null);
   if (game.phase !== priorPhase) {
     if (game.phase === 'ready' || game.phase === 'over') { release(); beep(); }
     priorPhase = game.phase;

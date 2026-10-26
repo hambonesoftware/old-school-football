@@ -159,7 +159,7 @@ function sprite(home, number, phase, direction, running) {
   return canvas;
 }
 
-export function drawFootballPlayer(ctx, { x,y,home,number,running,time,scale,led,reducedMotion,yaw=0 }) {
+export function drawFootballPlayer(ctx, { x,y,home,number,running,time,scale,led,reducedMotion,yaw=0,strideDistance=null }) {
   ctx.save();
   ctx.translate(x,y);
   if (led) {
@@ -169,7 +169,8 @@ export function drawFootballPlayer(ctx, { x,y,home,number,running,time,scale,led
   } else {
     ctx.fillStyle = '#061a1360';
     ctx.beginPath();ctx.ellipse(3*scale,12*scale,25*scale,10*scale,0,0,Math.PI*2);ctx.fill();
-    const phase = running && !reducedMotion ? Math.floor((time*2.1+number*.13)*16)%16 : 0;
+    const cycle = strideDistance === null ? time * 2.1 : strideDistance * .31;
+    const phase = running && !reducedMotion ? Math.floor((cycle+number*.13)*16)%16 : 0;
     const direction = ((Math.round(yaw/(Math.PI/4))%8)+8)%8;
     const image = sprite(home,number,phase,direction,running&&!reducedMotion);
     scale *= 1.13;
