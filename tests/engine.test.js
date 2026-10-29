@@ -73,6 +73,7 @@ test('first down resets the count and advances marker', () => {
   g.snap();
   g.yard = 36;
   g.finish();
+  g.update(.7);
   assert.equal(g.down, 1);
   assert.equal(g.target, 46);
   assert.equal(g.spot, 36);
@@ -84,6 +85,7 @@ test('four unsuccessful plays end drive', () => {
   for (let i = 0; i < 4; i++) {
     g.snap();
     g.finish();
+  g.update(.7);
   }
   assert.equal(g.phase, 'over');
   assert.match(g.message, /Turnover/);
@@ -117,6 +119,7 @@ test('a defender on the swept path ends the play', () => {
   g.snap();
   g.defenders = [{ lane: 2, yard: 27 }];
   g.update(.75);
+  g.update(.7);
   assert.equal(g.phase, 'ready');
   assert.equal(g.down, 2);
   assert.ok(g.spot >= 26 && g.spot <= 27);
@@ -171,6 +174,7 @@ test('tackle prepares a stable new formation before the next snap', () => {
   g.snap();
   g.yard = 32;
   g.finish();
+  g.update(.7);
   assert.equal(g.phase, 'ready');
   assert.equal(g.yard, 32);
   assert.equal(g.lane, 2);
@@ -189,6 +193,8 @@ test('best drive records the rounded yards awarded at a tackle', () => {
   g.snap();
   g.yard = 29.8;
   g.finish();
+  g.update(.7);
   assert.equal(g.spot, 30);
   assert.equal(g.gained, 5);
 });
+

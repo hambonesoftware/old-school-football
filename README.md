@@ -1,3 +1,9 @@
+## v0.6 — Football feedback pass
+
+Tackles now have a visible aftermath before the formation resets. Defenders commit, lunge and recover; chibi players lean into cuts, brace and celebrate. Original procedural audio adds footfalls, pad impacts, whistles, crowd ambience and scoring accents. First downs and touchdowns receive distinct feedback in the existing status strip. Pre-rendered player atlases avoid generating geometry during normal play.
+
+Settings include sound, separate effects/crowd volume and reduced motion. Run `npm test` and `node scripts/arcade-balance.mjs` for verification. See `docs/arcade-balance-200.md` for the current balance results and repeatable review checklist. Regenerate the checked-in player art with `node scripts/build-sprites.mjs` after installing the development-only `@napi-rs/canvas` package.
+
 # Old School Football — v0.5
 An original browser running challenge inspired by red LED handheld football, with a striped field and small animated football players. No third-party assets, dependencies, accounts, analytics, or external requests.
 
@@ -50,3 +56,4 @@ Runner movement is 150 ms per step. Defense acts a little faster and starts with
 - The split left-edge direction pad and right-edge Snap button remain. No play-result overlay covers the field.
 - Run npm test for the automated rules and model suite. Run node scripts/arcade-balance.mjs for 200 seeded arcade games, or add --save to regenerate the committed result JSON.
 - See [the 200-game balance report](docs/arcade-balance-200.md). The simulation does not substitute for hands-on phone playtesting.
+

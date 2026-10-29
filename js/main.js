@@ -1,16 +1,20 @@
-import { BALANCE } from './tuning.js?v=0.5';
-import { MovementClock } from './movement.js?v=0.5';
-import { Game } from './engine.js?v=0.5';
-import { render } from './renderer.js?v=0.5';
+import { loadPlayerAtlases } from './player-model.js?v=0.6';
+import { FootballAudio } from './audio.js?v=0.6';
+import { BALANCE } from './tuning.js?v=0.6';
+import { MovementClock } from './movement.js?v=0.6';
+import { Game } from './engine.js?v=0.6';
+import { render } from './renderer.js?v=0.6';
 
 const game = new Game();
 const $ = id => document.getElementById(id);
 const canvas = $('field');
 const ctx = canvas.getContext('2d');
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let led = false, sound = false, audio, held = null, activePointer = null;
+await loadPlayerAtlases();
+let reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const audio = new FootballAudio();
+let led = false, sound = true, held = null, activePointer = null;
 const movement = new MovementClock(BALANCE.playerStepSeconds);
-let last = performance.now(), best = 0, priorPhase = 'ready';
+let last = performance.now(), best = 0, priorPhase = 'ready', lastEvent = 0, pausePhase = 'live';
 let width = 1000, height = 650, dpr = 1, lastHud = '';
 try { best = Number(localStorage.getItem('old-school-football-best')) || 0; } catch {}
 
@@ -25,22 +29,7 @@ function resize() {
 new ResizeObserver(resize).observe(canvas);
 resize();
 
-function beep() {
-  if (!sound) return;
-  try {
-    audio ??= new (window.AudioContext || window.webkitAudioContext)();
-    audio.resume();
-    const oscillator = audio.createOscillator();
-    const volume = audio.createGain();
-    oscillator.connect(volume);
-    volume.connect(audio.destination);
-    oscillator.frequency.value = game.phase === 'over' ? 440 : 180;
-    volume.gain.setValueAtTime(.045, audio.currentTime);
-    volume.gain.exponentialRampToValueAtTime(.001, audio.currentTime + .15);
-    oscillator.start();
-    oscillator.stop(audio.currentTime + .16);
-  } catch {}
-}
+function beep() { audio.unlock(); }
 
 function release() {
   held = null;
@@ -55,11 +44,12 @@ function snap() {
   beep();
 }
 function pause() {
-  if (game.phase === 'live') {
+  if (game.phase === 'live' || game.phase === 'aftermath') {
+    pausePhase = game.phase;
     game.phase = 'paused';
     release();
   } else if (game.phase === 'paused' && $('settings').hidden) {
-    game.phase = 'live';
+    game.phase = pausePhase;
   }
 }
 function setSettings(open) {
@@ -67,7 +57,7 @@ function setSettings(open) {
   $('settings-toggle').setAttribute('aria-expanded', String(open));
   if (open) {
     release();
-    if (game.phase === 'live') game.phase = 'paused';
+    if (game.phase === 'live' || game.phase === 'aftermath') pause();
     $('settings-close').focus();
   } else {
     $('settings-toggle').focus();
@@ -91,8 +81,16 @@ $('mode').onclick = () => {
   $('mode').setAttribute('aria-pressed', String(led));
   $('mode').textContent = led ? 'Sprite mode' : 'LED mode';
 };
+$('effects-volume').oninput = event => { audio.effects = Number(event.target.value) / 100; };
+$('crowd-volume').oninput = event => { audio.crowd = Number(event.target.value) / 100; };
+$('motion').onclick = () => {
+  reducedMotion = !reducedMotion;
+  $('motion').setAttribute('aria-pressed', String(reducedMotion));
+  $('motion').textContent = reducedMotion ? 'Reduced motion on' : 'Reduced motion off';
+};
 $('sound').onclick = () => {
   sound = !sound;
+  audio.setEnabled(sound);
   $('sound').setAttribute('aria-pressed', String(sound));
   $('sound').textContent = sound ? 'Sound on' : 'Sound off';
   beep();
@@ -129,9 +127,9 @@ window.addEventListener('keyup', event => {
     for (const button of document.querySelectorAll('[data-dir]')) button.classList.remove('held');
   }
 });
-window.addEventListener('blur', () => { release(); if (game.phase === 'live') pause(); });
+window.addEventListener('blur', () => { release(); if (game.phase === 'live' || game.phase === 'aftermath') pause(); });
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { release(); if (game.phase === 'live') pause(); }
+  if (document.hidden) { release(); if (game.phase === 'live' || game.phase === 'aftermath') pause(); }
 });
 for (const button of document.querySelectorAll('[data-dir]')) {
   button.addEventListener('pointerdown', event => {
@@ -172,11 +170,11 @@ function updateHud() {
   $('down').textContent = `${['', '1st', '2nd', '3rd', '4th'][Math.min(4, game.down)]} & ${game.target === 100 ? 'GOAL' : Math.max(0, game.target - game.spot)}`;
   $('spot').textContent = game.spot <= 50 ? `GL ${game.spot}` : `IV ${100 - game.spot}`;
   $('message').textContent = game.phase === 'paused' ? 'Play paused. Press Resume when you are ready.' : game.message;
-  $('snap-label').textContent = game.phase === 'over' ? 'NEW DRIVE' : game.phase === 'live' ? 'BALL LIVE' : game.phase === 'paused' ? 'PAUSED' : 'SNAP BALL';
-  $('snap').disabled = game.phase === 'live' || game.phase === 'paused';
+  $('snap-label').textContent = game.phase === 'over' ? 'NEW DRIVE' : game.phase === 'live' ? 'BALL LIVE' : game.phase === 'paused' ? 'PAUSED' : game.phase === 'aftermath' ? 'PLAY RESULT' : 'SNAP BALL';
+  $('snap').disabled = !['ready','over'].includes(game.phase);
   $('pause').textContent = game.phase === 'paused' ? 'Resume' : 'Pause';
   $('pause').disabled = game.phase === 'ready' || game.phase === 'over';
-  $('live').textContent = { ready: 'PRE-SNAP', live: '● LIVE', paused: 'PAUSED', over: game.score === 20 ? 'TOUCHDOWN' : 'FINAL' }[game.phase];
+  $('live').textContent = { aftermath: 'WHISTLE', ready: 'PRE-SNAP', live: '● LIVE', paused: 'PAUSED', over: game.score === 20 ? 'TOUCHDOWN' : 'FINAL' }[game.phase];
   $('live').dataset.phase = game.phase;
   $('best').textContent = `${Math.floor(best)} yards`;
   $('control-hint').textContent = game.phase === 'live'
@@ -197,9 +195,18 @@ function frame(now) {
   if (game.phase === 'live') movement.advance(dt, direction => game.move(direction));
   game.update(dt, game.controlMode === 'arcade' ? held : null);
   if (game.phase !== priorPhase) {
-    if (game.phase === 'ready' || game.phase === 'over') { release(); beep(); }
+    if (['ready','over','aftermath'].includes(game.phase)) release();
     priorPhase = game.phase;
   }
+  if (game.eventId !== lastEvent) {
+    lastEvent = game.eventId;
+    if (game.event) {
+      audio.event(game.event.type);
+      const strip = document.querySelector('.play-strip');
+      strip.dataset.result = game.event.type;
+    }
+  }
+  audio.update(game);
   if (game.gained > best) {
     best = game.gained;
     try { localStorage.setItem('old-school-football-best', String(best)); } catch {}
@@ -208,5 +215,10 @@ function frame(now) {
   render(ctx, game, led, now / 1000, { width, height, dpr, reducedMotion });
   requestAnimationFrame(frame);
 }
+$('motion').setAttribute('aria-pressed', String(reducedMotion));
+$('motion').textContent = reducedMotion ? 'Reduced motion on' : 'Reduced motion off';
+// Opt-in local QA surface; absent from normal game sessions.
+if (new URLSearchParams(location.search).has('qa')) window.footballQA = { game, audio };
 updateHud();
 requestAnimationFrame(frame);
+

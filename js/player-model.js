@@ -33,14 +33,19 @@ const segmentRects = {
   d:[0,-.15,.14,.035], e:[-.077,-.077,.035,.14], f:[-.077,.077,.035,.14], g:[0,0,.14,.035]
 };
 
-export function buildFootballModel({ home = true, number = 22, cycle = 0, running = false, yaw = 0 } = {}) {
+export function buildFootballModel({ home = true, number = 22, cycle = 0, running = false, yaw = 0, pose = 'run', lean = 0 } = {}) {
   const colors = home ? palettes.home : palettes.away;
   const faces = [];
   const rotation = p => [p[0]*Math.cos(yaw)+p[2]*Math.sin(yaw), p[1], -p[0]*Math.sin(yaw)+p[2]*Math.cos(yaw)];
   const bounce = running ? Math.abs(Math.sin(cycle))* .07 : 0;
   // Chibi proportions: compress the legs most, retain broad torsos and big helmets.
   const proportion = p => [p[0], p[1] <= 1.75 ? p[1] * .64 : 1.12 + (p[1] - 1.75) * .88, p[2]];
-  const rotate = p => rotation(add(proportion(p), [0, bounce * .65, 0]));
+  const rotate = p => {
+    let q = proportion(p);
+    const crouch = pose === 'brace' ? .82 : pose === 'tackle' ? .72 : 1;
+    q = [q[0] + lean * Math.max(0, q[1] - .25) * .17, q[1] * crouch, q[2] + (running ? .10 : 0) * q[1]];
+    return rotation(add(q, [0, bounce * .65, 0]));
+  };
   function block(center, size, color, bevel = .045, transform = p => p) {
     const mesh = bevelGeometry(center, size, bevel);
     const vertices = mesh.vertices.map(p => rotate(transform(p)));
@@ -84,9 +89,11 @@ export function buildFootballModel({ home = true, number = 22, cycle = 0, runnin
     // Contrasting pants stripes stay as solid beveled panels.
     limb(add(hip,[side*.20,0,0]),add(knee,[side*.20,0,0]),.045,.26,colors.stripe);
     const shoulder = [side*.72,2.43,0];
-    const elbow = [side*.82,1.98,-swing*.27];
+    let elbow = [side*.82,1.98,-swing*.27];
     let hand = [side*.66,1.64,.16+swing*.20];
-    if (home && side===1) hand = [.57,2.02,.48];
+    if (pose === 'celebrate') { elbow = [side*.85,2.95,0]; hand = [side*.72,3.5,.2]; }
+    if (pose === 'tackle') { elbow = [side*.65,2.2,.5]; hand = [side*.55,2.1,.95]; }
+    if (home && side===1 && pose !== 'celebrate') hand = [.57,2.02,.48];
     limb(shoulder,elbow,.35,.38,colors.skin);
     limb(elbow,hand,.28,.30,colors.skin);
     block(hand,[.31,.30,.31],colors.glove,.04);
@@ -123,10 +130,19 @@ function shade(hex, light) {
   return `rgb(${color.map(v => Math.round(Math.min(255,v*light))).join(',')})`;
 }
 const cache = new Map();
+const atlases = new Map();
+export async function loadPlayerAtlases() {
+  await Promise.all([22,41,42,43,44,45,46].map(number => new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => { atlases.set(number, img); resolve(); };
+    img.onerror = () => resolve(); // Geometry fallback keeps the game playable offline.
+    img.src = new URL(`../assets/player-${number}.png`, import.meta.url).href;
+  })));
+}
 const eye = unit([.18,.72,-1]);
 const light = unit([-.6,1,-.8]);
-function sprite(home, number, phase, direction, running) {
-  const key = [home,number,phase,direction,running].join(':');
+export function sprite(home, number, phase, direction, running, pose, lean) {
+  const key = [home,number,phase,direction,running,pose,lean].join(':');
   if (cache.has(key)) {
     const value = cache.get(key);
     cache.delete(key);cache.set(key,value);
@@ -136,7 +152,7 @@ function sprite(home, number, phase, direction, running) {
   canvas.width = 256;canvas.height = 288;
   const ctx = canvas.getContext('2d');
   ctx.scale(2,2);
-  const faces = buildFootballModel({ home,number,cycle:phase/16*Math.PI*2,running,yaw:direction*Math.PI/4 });
+  const faces = buildFootballModel({ home,number,cycle:phase/16*Math.PI*2,running,yaw:direction*Math.PI/4,pose,lean });
   const polygons = [];
   for (const face of faces) {
     const normal = unit(cross(sub(face.points[1],face.points[0]),sub(face.points[2],face.points[0])));
@@ -155,11 +171,11 @@ function sprite(home, number, phase, direction, running) {
     ctx.closePath();ctx.fill();
   }
   cache.set(key,canvas);
-  if (cache.size > 128) cache.delete(cache.keys().next().value);
+  if (cache.size > 384) cache.delete(cache.keys().next().value);
   return canvas;
 }
 
-export function drawFootballPlayer(ctx, { x,y,home,number,running,time,scale,led,reducedMotion,yaw=0,strideDistance=null }) {
+export function drawFootballPlayer(ctx, { x,y,home,number,running,time,scale,led,reducedMotion,yaw=0,strideDistance=null,pose='run',lean=0,fall=0,celebration=0 }) {
   ctx.save();
   ctx.translate(x,y);
   if (led) {
@@ -172,9 +188,19 @@ export function drawFootballPlayer(ctx, { x,y,home,number,running,time,scale,led
     const cycle = strideDistance === null ? time * 2.1 : strideDistance * .31;
     const phase = running && !reducedMotion ? Math.floor((cycle+number*.13)*16)%16 : 0;
     const direction = ((Math.round(yaw/(Math.PI/4))%8)+8)%8;
-    const image = sprite(home,number,phase,direction,running&&!reducedMotion);
+    const atlas = atlases.get(number);
+    const frame = pose === 'brace' ? 17 : pose === 'tackle' ? 18 : pose === 'celebrate' ? 19
+      : running && !reducedMotion ? phase : 16;
+    const image = atlas || sprite(home,number,phase,direction,running&&!reducedMotion,pose,0);
+    if (!reducedMotion) {
+      ctx.translate(0, -Math.abs(Math.sin(celebration * 7)) * 8 * scale);
+      ctx.rotate(fall * 1.18);
+      ctx.transform(1, 0, -lean * .12, 1, 0, 0);
+    }
     scale *= 1.13;
-    ctx.drawImage(image,-64*scale,-112*scale,128*scale,144*scale);
+    if (atlas) ctx.drawImage(atlas,(frame % 8)*256,Math.floor(frame/8)*288,256,288,-64*scale,-112*scale,128*scale,144*scale);
+    else ctx.drawImage(image,-64*scale,-112*scale,128*scale,144*scale);
   }
   ctx.restore();
 }
+

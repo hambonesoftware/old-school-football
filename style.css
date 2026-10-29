@@ -23,3 +23,19 @@ button:hover{filter:brightness(1.15)}button:focus-visible{outline:3px solid var(
 .snap-control{align-items:flex-end}
 .legend{display:none}
 @media(max-width:800px){.drive-note{display:none}}
+
+
+/* Event emphasis lives in the existing broadcast strip, never over the field. */
+.play-strip { transition: background-color .18s, box-shadow .18s; }
+.play-strip[data-result="tackle"] { background: #342e25; box-shadow: inset 4px 0 #d98851; }
+.play-strip[data-result="marker"], .play-strip[data-result="firstDown"] { background: #273b32; box-shadow: inset 4px 0 #f2cb55; }
+.play-strip[data-result="touchdown"] { background: #514421; box-shadow: inset 4px 0 #ffe07c; }
+.play-strip[data-result="loss"] { background: #402731; box-shadow: inset 4px 0 #c76373; }
+.audio-levels { display:flex; flex-wrap:wrap; gap:16px; margin:18px 0; }
+.audio-levels label { display:flex; align-items:center; gap:10px; font-size:14px; }
+.audio-levels input { min-height:44px; accent-color:#f2cb55; width:150px; }
+@media (prefers-reduced-motion: reduce) { .play-strip { transition:none; } }
+
+html, body { overscroll-behavior:none; }
+.field-wrap, .control-deck { touch-action:none; }
+.settings { max-height:calc(100svh - 80px); overflow-y:auto; }

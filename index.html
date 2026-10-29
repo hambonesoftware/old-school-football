@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#101b27">
   <meta name="description" content="Old School Football: a handheld-inspired running game with a college football broadcast presentation.">
   <title>Old School Football · Saturday Football</title>
-  <link rel="stylesheet" href="style.css?v=0.5">
+  <link rel="stylesheet" href="style.css?v=0.6">
 </head>
 <body>
   <main class="app">
     <header class="masthead">
-      <div class="brand"><span class="network-mark">HBN</span><div><h1>OLD SCHOOL FOOTBALL</h1><span class="edition">SATURDAY FOOTBALL / THE FINAL DRIVE</span></div></div>
+      <div class="brand"><span class="network-mark">HBN</span><div><h1>OLD SCHOOL FOOTBALL</h1><span class="edition">SATURDAY FOOTBALL / THE FINAL DRIVE · v0.6</span></div></div>
       <nav aria-label="Game settings"><button id="pause">Pause</button><button id="settings-toggle" aria-expanded="false" aria-controls="settings">Settings</button></nav>
     </header>
     <section class="scorebug" aria-label="Scoreboard">
@@ -38,17 +38,19 @@
           <button data-dir="right" class="right" aria-label="Run right">▶</button>
           <button data-dir="down" class="down" aria-label="Hold to brake">▼</button>
         </div>
-        <div class="snap-control"><button id="snap" class="snap"><span class="snap-icon">▶</span><span id="snap-label">SNAP BALL</span></button><span id="control-hint">READ THE DEFENSE · THEN SNAP</span></div>
+        <div class="snap-control"><button id="snap" class="snap" disabled><span class="snap-icon">▶</span><span id="snap-label">WARMING UP</span></button><span id="control-hint">READ THE DEFENSE · THEN SNAP</span></div>
       </div>
       <div class="legend"><span><i class="los"></i>Line of scrimmage</span><span><i class="first"></i>First-down marker</span><span>ARROWS / WASD · SPACE TO SNAP</span></div>
     </section>
     <section id="settings" class="settings" hidden aria-label="Game settings">
       <div class="settings-heading"><b>GAME SETTINGS</b><button id="settings-close" aria-label="Close settings">✕</button></div>
-      <div class="setting-actions"><button id="control-mode">Switch to Classic steps</button><button id="mode" aria-pressed="false">LED mode</button><button id="sound" aria-pressed="false">Sound off</button><button id="restart">Restart challenge</button></div>
+      <div class="setting-actions"><button id="control-mode">Switch to Classic steps</button><button id="mode" aria-pressed="false">LED mode</button><button id="sound" aria-pressed="true">Sound on</button><button id="motion" aria-pressed="false">Reduced motion off</button><button id="restart">Restart challenge</button></div>
+      <div class="audio-levels"><label>Effects <input id="effects-volume" type="range" min="0" max="100" value="70"></label><label>Crowd <input id="crowd-volume" type="range" min="0" max="100" value="35"></label></div>
       <p>Arcade mode: automatically run forward after the snap, steer with left/right, hold up to surge, or down to brake. Classic mode keeps the original step-by-step four-direction movement. Switching modes restarts the drive.</p><p>Four downs to gain ten yards. Reach the top end zone before the live-play clock expires. The clock stops between plays. P pauses; Space snaps.</p>
       <p>Blue marks the snap position. Gold marks the first down. Your runner wears maize and has a selection ring. This is a running-only arcade challenge.</p>
     </section>
   </main>
-  <script type="module" src="js/main.js?v=0.5"></script>
+  <script type="module" src="js/main.js?v=0.6"></script>
 </body>
 </html>
+

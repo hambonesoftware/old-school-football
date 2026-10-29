@@ -1,4 +1,4 @@
-import { drawFootballPlayer } from './player-model.js?v=0.5';
+import { drawFootballPlayer } from './player-model.js?v=0.6';
 
 // Presentation state only. Interpolation never changes the rules or collision cells.
 const views = new WeakMap();
@@ -19,12 +19,18 @@ export function render(ctx, game, led, time, options = {}) {
   ctx.clearRect(0, 0, width, height);
   let view = views.get(ctx);
   if (!view) {
-    view = { play: -1, lastTime: time, actors: [], camera: game.yard };
+    view = { eventId: -1, effect: null, play: -1, lastTime: time, actors: [], camera: game.yard };
     views.set(ctx, view);
   }
   const dt = Math.min(.06, Math.max(0, time - view.lastTime));
   const blend = reducedMotion ? 1 : 1 - Math.exp(-18 * dt);
   view.lastTime = time;
+  if (view.eventId !== game.eventId) {
+    view.eventId = game.eventId;
+    if (game.event && ['tackle', 'touchdown', 'marker', 'firstDown', 'cut'].includes(game.event.type))
+      view.effect = { type: game.event.type, time, lane: game.lane, yard: game.aftermath?.yard ?? game.yard };
+  }
+  const effectAge = view.effect ? time - view.effect.time : 99;
   const changedPlay = view.play !== game.playNumber;
   view.play = game.playNumber;
   const snapView = changedPlay || game.phase === 'ready';
@@ -41,7 +47,9 @@ export function render(ctx, game, led, time, options = {}) {
   const margin = Math.max(29, width * .075);
   const fieldWidth = width - 2 * margin;
   const yardsToPixels = height / 37;
-  const yardY = yard => height * .76 - (yard - view.camera) * yardsToPixels;
+  const impact = !reducedMotion && view.effect?.type === 'tackle' && effectAge < .18
+    ? Math.sin(effectAge * 100) * (1 - effectAge / .18) * 2 : 0;
+  const yardY = yard => height * .76 - (yard - view.camera) * yardsToPixels + impact;
   const laneX = lane => margin + fieldWidth * (.13 + lane * .185);
   const scale = Math.max(.65, Math.min(1.12, width / 650, height / 410));
   ctx.fillStyle = led ? '#060c08' : '#243a2a';
@@ -51,8 +59,10 @@ export function render(ctx, game, led, time, options = {}) {
   for (let row = 0; row < height / 13; row++) {
     for (let col = 0; col < 3; col++) {
       ctx.fillStyle = ['#cfba80', '#8c293b', '#233e5b', '#e8e1cb', '#738a77'][(row * 7 + col * 3) % 5];
-      ctx.fillRect(4 + col * 7, row * 13 + (col % 2) * 4, 4, 5);
-      ctx.fillRect(width - 8 - col * 7, row * 13 + (col % 2) * 4, 4, 5);
+      const energy = game.score === 20 ? 2.5 : game.phase === 'live' ? .6 : .15;
+      const lift = reducedMotion ? 0 : Math.sin(time * 5 + row * 1.7 + col) * energy;
+      ctx.fillRect(4 + col * 7, row * 13 + (col % 2) * 4 + lift, 4, 5);
+      ctx.fillRect(width - 8 - col * 7, row * 13 + (col % 2) * 4 - lift, 4, 5);
     }
   }
   ctx.fillStyle = led ? '#19231b' : '#d2d5c4';
@@ -141,6 +151,10 @@ export function render(ctx, game, led, time, options = {}) {
   }
   fieldLine(game.spot, '#66bdff');
   fieldLine(game.target, '#f9cf49');
+  if (game.firstDownShown && game.phase === 'live') {
+    ctx.fillStyle = '#f9cf4926';
+    ctx.fillRect(margin, yardY(game.target) - 5, fieldWidth, 10);
+  }
   ctx.restore();
 
   // Orange sideline first-down marker.
@@ -148,18 +162,24 @@ export function render(ctx, game, led, time, options = {}) {
   if (markerY > 0 && markerY < height) {
     rounded(ctx, width - margin + 1, markerY - 10, 8, 20, 2, '#f07b32');
   }
-  const actors = [{ lane: game.lane, yard: game.yard }, ...game.defenders];
-  actors.forEach((actor, index) => {
+  const contact = game.aftermath;
+  const actors = [{ lane: game.lane, yard: contact ? contact.yard : game.yard }, ...game.defenders];
+  // Sort feet from far to near while preserving stable actor identities.
+  actors.map((actor, index) => ({ actor, index })).sort((a,b) => b.actor.yard - a.actor.yard).forEach(({ actor, index }) => {
     let current = view.actors[index];
     // Respawned defenders are placed directly rather than flying across the pitch.
-    if (!current || snapView || Math.abs(current.yard - actor.yard) > 8) {
+    if (!current || snapView || contact || Math.abs(current.yard - actor.yard) > 8) {
       current = { lane: actor.lane, yard: actor.yard };
     } else {
-      current.lane += (actor.lane - current.lane) * blend;
+      current.lane += (actor.lane - current.lane) * (1 - Math.exp(-55 * dt));
       current.yard += (actor.yard - current.yard) * blend;
     }
     view.actors[index] = current;
-    const x = laneX(current.lane), y = yardY(current.yard);
+    const isHit = contact && index === contact.defender + 1 && contact.defender >= 0;
+    const settle = contact ? Math.min(1, Math.max(0, (contact.age - .055) / .30)) : 0;
+    let x = laneX(current.lane), y = yardY(current.yard);
+    if (contact && index === 0) { x += reducedMotion ? 0 : settle * 10 * scale; y += reducedMotion ? 0 : settle * 13 * scale; }
+    if (isHit) { x = laneX(contact.lane) - 12 * scale; y = yardY(contact.yard) - 15 * scale; }
     if (y < -40 || y > height + 40) return;
     if (index === 0) {
       ctx.strokeStyle = '#f8d15d';
@@ -183,12 +203,42 @@ export function render(ctx, game, led, time, options = {}) {
     }
     const running = game.phase === 'live' && (index > 0 ||
       (game.controlMode === 'arcade' ? game.runSpeed > .25 : game.movingTimer > 0));
+    const defender = index > 0 ? actor : null;
+    const winner = index === 0 && game.score === 20;
+    const pose = winner ? 'celebrate' : isHit ? 'tackle' : contact && index === 0 ? 'brace'
+      : index === 0 && game.input === 'down' && game.phase === 'live' ? 'brace' : defender?.state === 'commit' ? 'brace' : ['lunge','recover'].includes(defender?.state) ? 'tackle' : 'run';
+    const fall = contact && (index === 0 || isHit) ? settle * (index === 0 ? 1 : -.65)
+      : defender?.state === 'recover' ? -.3 * Math.min(1, defender.timer / .2) : 0;
     drawFootballPlayer(ctx, {
       x, y, home: index === 0, number: index === 0 ? 22 : 40 + index,
       running, time, scale, led, reducedMotion,
-      strideDistance: index === 0 ? game.distanceTravelled : null,
+      strideDistance: index === 0 ? game.distanceTravelled : (actor.stride || 0),
+      pose, lean: index === 0 ? game.cut * Math.min(1, game.cutTime / .12) : 0,
+      fall, celebration: winner ? game.presentationTime : 0,
       yaw: index === 0 ? 0 : Math.PI
     });
   });
+  // Localized turf flecks; the field and controls remain unobstructed.
+  if (!led && !reducedMotion && view.effect && effectAge < .5 && ['cut','tackle'].includes(view.effect.type)) {
+    const count = view.effect.type === 'tackle' ? 16 : 7;
+    const ex = laneX(view.effect.lane), ey = yardY(view.effect.yard);
+    ctx.globalAlpha = Math.max(0, 1 - effectAge / .5);
+    for (let i = 0; i < count; i++) {
+      const a = i * 2.399, speed = 25 + i * 3;
+      ctx.fillStyle = i % 2 ? '#b6a76a' : '#78a75a';
+      ctx.fillRect(ex + Math.cos(a) * speed * effectAge, ey + Math.sin(a) * speed * effectAge + 40 * effectAge * effectAge, 3, 2);
+    }
+    ctx.globalAlpha = 1;
+  }
+  if (!led && !reducedMotion && game.score === 20 && game.presentationTime < 3) {
+    for (let i = 0; i < 50; i++) {
+      const t = game.presentationTime;
+      ctx.fillStyle = ['#f6d35c','#f8f4db','#66a6ba'][i % 3];
+      const x = (i * 97.3 % width) + Math.sin(t * 3 + i) * 14;
+      const y = -30 - (i * 19 % 120) + t * (65 + i % 45);
+      ctx.fillRect(x, y, 3, 6);
+    }
+  }
   // Intentionally no modal, result card, or pre-snap box over the field.
 }
+

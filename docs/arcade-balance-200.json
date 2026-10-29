@@ -1,5 +1,5 @@
 {
-  "method": "200 seeded arcade games at 120 Hz, 50 per behavior. Bots observe only sampled current defenders; results do not measure human feel or skill.",
+  "method": "200 seeded arcade engine games at 120 Hz: 50 seeds per behavior. Bots observe only sampled current defenders; these are not human playtests.",
   "tuning": {
     "playerStepSeconds": 0.15,
     "playerCruiseYardsPerSecond": 7.2,
@@ -27,34 +27,34 @@
     {
       "style": "straight",
       "games": 50,
-      "touchdowns": 14,
-      "meanYards": 63.8,
-      "meanLiveSeconds": 11.8,
-      "meanPlays": 18.2
+      "touchdowns": 3,
+      "meanYards": 23.5,
+      "meanLiveSeconds": 4.2,
+      "meanPlays": 8
     },
     {
       "style": "reactive",
       "games": 50,
       "touchdowns": 50,
       "meanYards": 75,
-      "meanLiveSeconds": 11.5,
-      "meanPlays": 7.3
+      "meanLiveSeconds": 11.4,
+      "meanPlays": 6.3
     },
     {
       "style": "reader",
       "games": 50,
       "touchdowns": 50,
       "meanYards": 75,
-      "meanLiveSeconds": 11.1,
-      "meanPlays": 4
+      "meanLiveSeconds": 11,
+      "meanPlays": 3.3
     },
     {
       "style": "reckless",
       "games": 50,
       "touchdowns": 50,
       "meanYards": 75,
-      "meanLiveSeconds": 10.3,
-      "meanPlays": 4.2
+      "meanLiveSeconds": 10.4,
+      "meanPlays": 4.5
     }
   ],
   "games": [
@@ -62,25 +62,18 @@
       "seed": 1000,
       "style": "straight",
       "result": "downs",
-      "yards": 62.8,
-      "liveSeconds": 11.76,
-      "plays": 19,
+      "yards": 30,
+      "liveSeconds": 5.64,
+      "plays": 12,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        6,
-        4,
-        3,
-        6,
-        3,
-        3,
-        3,
-        3,
         2,
         2,
-        6,
+        2,
+        5,
+        2,
+        2,
+        5,
         2,
         2,
         2,
@@ -93,18 +86,25 @@
       "style": "straight",
       "result": "downs",
       "yards": 58,
-      "liveSeconds": 9.96,
-      "plays": 12,
+      "liveSeconds": 10.33,
+      "plays": 19,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
+        2,
+        2,
+        2,
         13,
-        13,
-        3,
-        3,
+        2,
+        2,
+        2,
+        5,
+        2,
+        2,
+        2,
+        4,
+        2,
         6,
+        2,
         2,
         2,
         2,
@@ -115,22 +115,12 @@
       "seed": 1274,
       "style": "straight",
       "result": "downs",
-      "yards": 60.9,
-      "liveSeconds": 10.95,
-      "plays": 16,
+      "yards": 19,
+      "liveSeconds": 3.29,
+      "plays": 6,
       "cuts": 0,
       "gains": [
         9,
-        4,
-        4,
-        4,
-        10,
-        3,
-        3,
-        3,
-        3,
-        2,
-        6,
         2,
         2,
         2,
@@ -141,29 +131,30 @@
     {
       "seed": 1411,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.19,
+      "result": "downs",
+      "yards": 66,
+      "liveSeconds": 11.43,
       "plays": 20,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
+        2,
+        2,
+        2,
         6,
         9,
-        3,
-        6,
-        3,
-        3,
-        3,
-        6,
-        2,
-        6,
-        2,
-        2,
         2,
         5,
+        2,
+        2,
+        2,
+        6,
+        2,
+        6,
+        6,
+        2,
+        2,
+        2,
+        2,
         2,
         2
       ]
@@ -172,23 +163,11 @@
       "seed": 1548,
       "style": "straight",
       "result": "downs",
-      "yards": 58,
-      "liveSeconds": 10.78,
-      "plays": 16,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        6,
-        3,
-        3,
-        6,
-        6,
         2,
         2,
         2,
@@ -200,25 +179,29 @@
       "style": "straight",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 12.93,
-      "plays": 18,
+      "liveSeconds": 13,
+      "plays": 22,
       "cuts": 0,
       "gains": [
-        4,
-        14,
-        4,
-        3,
-        6,
-        3,
-        6,
-        3,
         2,
-        6,
+        11,
+        2,
         2,
         5,
+        2,
         6,
         2,
+        2,
         5,
+        2,
+        4,
+        6,
+        6,
+        2,
+        2,
+        2,
+        6,
+        2,
         2,
         2
       ]
@@ -227,25 +210,18 @@
       "seed": 1822,
       "style": "straight",
       "result": "downs",
-      "yards": 66.8,
-      "liveSeconds": 12.21,
-      "plays": 18,
+      "yards": 38,
+      "liveSeconds": 6.5,
+      "plays": 11,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        13,
-        6,
-        3,
-        3,
-        3,
+        2,
+        2,
+        2,
+        14,
         6,
         2,
         2,
-        2,
-        2,
-        5,
         2,
         2,
         2,
@@ -255,53 +231,30 @@
     {
       "seed": 1959,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.73,
-      "plays": 21,
+      "result": "downs",
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        7,
-        3,
-        3,
-        3,
-        6,
         2,
         2,
         2,
-        6,
-        2,
-        2,
-        5,
-        5
+        2
       ]
     },
     {
       "seed": 2096,
       "style": "straight",
       "result": "downs",
-      "yards": 55.1,
-      "liveSeconds": 10.33,
-      "plays": 14,
+      "yards": 25,
+      "liveSeconds": 4.23,
+      "plays": 7,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        13,
-        3,
-        3,
-        3,
-        6,
-        6,
-        3,
         2,
+        2,
+        13,
         2,
         2,
         2,
@@ -312,22 +265,13 @@
       "seed": 2233,
       "style": "straight",
       "result": "downs",
-      "yards": 55.1,
-      "liveSeconds": 10.34,
-      "plays": 16,
+      "yards": 18,
+      "liveSeconds": 3.38,
+      "plays": 7,
       "cuts": 0,
       "gains": [
-        9,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
         6,
-        3,
-        3,
-        3,
+        2,
         2,
         2,
         2,
@@ -339,25 +283,11 @@
       "seed": 2370,
       "style": "straight",
       "result": "downs",
-      "yards": 56.1,
-      "liveSeconds": 10.79,
-      "plays": 18,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        6,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        2,
         2,
         2,
         2,
@@ -368,27 +298,21 @@
       "seed": 2507,
       "style": "straight",
       "result": "downs",
-      "yards": 72.8,
-      "liveSeconds": 13.16,
-      "plays": 20,
+      "yards": 49,
+      "liveSeconds": 8.49,
+      "plays": 14,
       "cuts": 0,
       "gains": [
-        4,
-        4,
+        2,
+        2,
         10,
-        4,
-        6,
-        3,
-        3,
-        3,
-        6,
-        6,
-        2,
-        2,
-        2,
-        2,
         2,
         6,
+        2,
+        2,
+        2,
+        5,
+        8,
         2,
         2,
         2,
@@ -399,26 +323,19 @@
       "seed": 2644,
       "style": "straight",
       "result": "downs",
-      "yards": 67.8,
-      "liveSeconds": 12.59,
-      "plays": 19,
+      "yards": 37,
+      "liveSeconds": 6.48,
+      "plays": 12,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        13,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
         2,
         2,
         2,
+        12,
         2,
-        9,
+        2,
+        5,
+        2,
         2,
         2,
         2,
@@ -429,21 +346,13 @@
       "seed": 2781,
       "style": "straight",
       "result": "downs",
-      "yards": 53.2,
-      "liveSeconds": 9.83,
-      "plays": 14,
+      "yards": 19,
+      "liveSeconds": 3.42,
+      "plays": 6,
       "cuts": 0,
       "gains": [
         6,
-        6,
-        4,
-        4,
-        3,
-        3,
-        7,
-        3,
-        3,
-        6,
+        5,
         2,
         2,
         2,
@@ -454,25 +363,11 @@
       "seed": 2918,
       "style": "straight",
       "result": "downs",
-      "yards": 54.1,
-      "liveSeconds": 10.65,
-      "plays": 18,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
         2,
         2,
         2,
@@ -483,29 +378,27 @@
       "seed": 3055,
       "style": "straight",
       "result": "downs",
-      "yards": 71.8,
-      "liveSeconds": 13.53,
-      "plays": 22,
+      "yards": 66,
+      "liveSeconds": 11.56,
+      "plays": 20,
       "cuts": 0,
       "gains": [
-        4,
-        4,
+        2,
+        2,
         9,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        2,
-        2,
-        2,
         5,
+        9,
+        5,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        4,
         6,
+        2,
+        2,
         2,
         2,
         2,
@@ -516,24 +409,11 @@
       "seed": 3192,
       "style": "straight",
       "result": "downs",
-      "yards": 60.9,
-      "liveSeconds": 11.08,
-      "plays": 17,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        6,
-        3,
-        3,
-        3,
-        7,
-        3,
-        6,
-        2,
         2,
         2,
         2,
@@ -543,30 +423,16 @@
     {
       "seed": 3329,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 14.01,
-      "plays": 23,
+      "result": "downs",
+      "yards": 20,
+      "liveSeconds": 3.64,
+      "plays": 8,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
+        2,
+        2,
+        2,
         6,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        2,
-        9,
-        5,
-        2,
-        2,
         2,
         2,
         2,
@@ -576,22 +442,33 @@
     {
       "seed": 3466,
       "style": "straight",
-      "result": "downs",
-      "yards": 49.4,
-      "liveSeconds": 8.8,
-      "plays": 12,
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 13.25,
+      "plays": 24,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        6,
-        4,
-        6,
-        3,
-        6,
-        7,
-        3,
         2,
+        2,
+        5,
+        2,
+        5,
+        2,
+        5,
+        6,
+        2,
+        2,
+        2,
+        5,
+        2,
+        2,
+        6,
+        2,
+        6,
+        2,
+        2,
+        2,
+        7,
         2,
         2
       ]
@@ -600,26 +477,11 @@
       "seed": 3603,
       "style": "straight",
       "result": "downs",
-      "yards": 66.8,
-      "liveSeconds": 12.16,
-      "plays": 19,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        6,
-        3,
-        6,
-        3,
-        3,
-        3,
-        2,
-        2,
-        6,
-        5,
         2,
         2,
         2,
@@ -629,30 +491,12 @@
     {
       "seed": 3740,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.75,
-      "plays": 23,
+      "result": "downs",
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        8,
-        3,
-        3,
-        3,
-        3,
-        2,
-        9,
-        2,
-        2,
-        2,
-        2,
-        5,
         2,
         2,
         2,
@@ -663,24 +507,11 @@
       "seed": 3877,
       "style": "straight",
       "result": "downs",
-      "yards": 59,
-      "liveSeconds": 11,
-      "plays": 17,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        10,
         2,
         2,
         2,
@@ -690,29 +521,16 @@
     {
       "seed": 4014,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.9,
-      "plays": 22,
+      "result": "downs",
+      "yards": 23,
+      "liveSeconds": 4.06,
+      "plays": 8,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
+        2,
+        2,
+        2,
         9,
-        3,
-        3,
-        9,
-        3,
-        3,
-        3,
-        2,
-        2,
-        5,
-        2,
-        2,
-        5,
-        2,
         2,
         2,
         2,
@@ -723,24 +541,18 @@
       "seed": 4151,
       "style": "straight",
       "result": "downs",
-      "yards": 58,
-      "liveSeconds": 10.9,
-      "plays": 17,
+      "yards": 33,
+      "liveSeconds": 5.82,
+      "plays": 11,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        9,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        6,
         2,
+        2,
+        9,
+        2,
+        2,
+        2,
+        6,
         2,
         2,
         2,
@@ -751,27 +563,11 @@
       "seed": 4288,
       "style": "straight",
       "result": "downs",
-      "yards": 62.8,
-      "liveSeconds": 12.04,
-      "plays": 20,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        6,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        2,
-        6,
-        2,
         2,
         2,
         2,
@@ -781,63 +577,41 @@
     {
       "seed": 4425,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.85,
-      "plays": 21,
+      "result": "downs",
+      "yards": 71,
+      "liveSeconds": 11.98,
+      "plays": 18,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        9,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
+        2,
         2,
         2,
         9,
         2,
         2,
+        5,
         2,
-        7,
+        6,
+        2,
+        5,
+        10,
+        9,
+        5,
+        2,
+        2,
+        2,
         2
       ]
     },
     {
       "seed": 4562,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 14.04,
-      "plays": 25,
+      "result": "downs",
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        6,
-        3,
-        3,
-        3,
-        3,
-        2,
-        6,
-        2,
-        2,
-        5,
-        2,
-        2,
-        2,
         2,
         2,
         2,
@@ -847,55 +621,27 @@
     {
       "seed": 4699,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.22,
-      "plays": 20,
+      "result": "downs",
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        6,
-        6,
-        3,
-        3,
-        3,
-        3,
-        12,
         2,
         2,
         2,
-        6,
-        2,
-        2,
-        2,
-        5
+        2
       ]
     },
     {
       "seed": 4836,
       "style": "straight",
       "result": "downs",
-      "yards": 58,
-      "liveSeconds": 10.73,
-      "plays": 17,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        6,
-        3,
-        3,
-        3,
-        3,
-        3,
-        6,
         2,
         2,
         2,
@@ -906,23 +652,13 @@
       "seed": 4973,
       "style": "straight",
       "result": "downs",
-      "yards": 59,
-      "liveSeconds": 10.83,
-      "plays": 16,
+      "yards": 24,
+      "liveSeconds": 3.98,
+      "plays": 6,
       "cuts": 0,
       "gains": [
-        4,
-        14,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        6,
         2,
+        14,
         2,
         2,
         2,
@@ -933,23 +669,11 @@
       "seed": 5110,
       "style": "straight",
       "result": "downs",
-      "yards": 53.2,
-      "liveSeconds": 10.37,
-      "plays": 16,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        6,
-        3,
-        3,
-        3,
-        3,
-        3,
-        6,
-        2,
         2,
         2,
         2,
@@ -960,26 +684,14 @@
       "seed": 5247,
       "style": "straight",
       "result": "downs",
-      "yards": 69.8,
-      "liveSeconds": 12.55,
-      "plays": 19,
+      "yards": 18,
+      "liveSeconds": 3.24,
+      "plays": 7,
       "cuts": 0,
       "gains": [
         6,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        6,
-        3,
-        6,
         2,
-        6,
         2,
-        6,
         2,
         2,
         2,
@@ -990,24 +702,11 @@
       "seed": 5384,
       "style": "straight",
       "result": "downs",
-      "yards": 54.1,
-      "liveSeconds": 10.51,
-      "plays": 17,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        6,
-        3,
-        2,
         2,
         2,
         2,
@@ -1018,27 +717,16 @@
       "seed": 5521,
       "style": "straight",
       "result": "downs",
-      "yards": 65.8,
-      "liveSeconds": 12.44,
-      "plays": 21,
+      "yards": 28,
+      "liveSeconds": 4.97,
+      "plays": 10,
       "cuts": 0,
       "gains": [
         6,
-        4,
-        4,
-        4,
+        2,
+        2,
+        2,
         6,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        2,
-        2,
-        5,
         2,
         2,
         2,
@@ -1050,27 +738,13 @@
       "seed": 5658,
       "style": "straight",
       "result": "downs",
-      "yards": 64.8,
-      "liveSeconds": 12.24,
-      "plays": 20,
+      "yards": 20,
+      "liveSeconds": 3.43,
+      "plays": 6,
       "cuts": 0,
       "gains": [
-        4,
+        2,
         10,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        2,
-        2,
-        6,
-        2,
         2,
         2,
         2,
@@ -1081,21 +755,12 @@
       "seed": 5795,
       "style": "straight",
       "result": "downs",
-      "yards": 50.3,
-      "liveSeconds": 9.01,
-      "plays": 13,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        9,
-        6,
-        3,
-        3,
-        3,
+        2,
         2,
         2,
         2
@@ -1105,21 +770,12 @@
       "seed": 5932,
       "style": "straight",
       "result": "downs",
-      "yards": 49.4,
-      "liveSeconds": 9.17,
-      "plays": 13,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        11,
-        3,
+        2,
         2,
         2,
         2
@@ -1128,31 +784,12 @@
     {
       "seed": 6069,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 14.02,
-      "plays": 24,
+      "result": "downs",
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        6,
-        3,
-        3,
-        3,
-        6,
-        3,
-        3,
-        2,
-        2,
-        6,
-        2,
-        2,
-        2,
-        2,
-        6,
         2,
         2,
         2,
@@ -1163,25 +800,11 @@
       "seed": 6206,
       "style": "straight",
       "result": "downs",
-      "yards": 58,
-      "liveSeconds": 11.03,
-      "plays": 18,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        6,
         2,
         2,
         2,
@@ -1191,30 +814,18 @@
     {
       "seed": 6343,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.73,
-      "plays": 22,
+      "result": "downs",
+      "yards": 29,
+      "liveSeconds": 5,
+      "plays": 9,
       "cuts": 0,
       "gains": [
         6,
-        4,
-        4,
+        2,
+        2,
         9,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        6,
         2,
         2,
-        5,
-        2,
-        5,
         2,
         2,
         2
@@ -1224,21 +835,14 @@
       "seed": 6480,
       "style": "straight",
       "result": "downs",
-      "yards": 57,
-      "liveSeconds": 10.33,
-      "plays": 14,
+      "yards": 18,
+      "liveSeconds": 3.37,
+      "plays": 7,
       "cuts": 0,
       "gains": [
-        4,
-        9,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        13,
+        2,
+        6,
+        2,
         2,
         2,
         2,
@@ -1249,25 +853,11 @@
       "seed": 6617,
       "style": "straight",
       "result": "downs",
-      "yards": 54.1,
-      "liveSeconds": 10.65,
-      "plays": 18,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
         2,
         2,
         2,
@@ -1277,30 +867,13 @@
     {
       "seed": 6754,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.94,
-      "plays": 22,
+      "result": "downs",
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        6,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
         2,
-        2,
-        2,
-        5,
-        2,
-        6,
         2,
         2,
         2
@@ -1310,23 +883,13 @@
       "seed": 6891,
       "style": "straight",
       "result": "downs",
-      "yards": 53.2,
-      "liveSeconds": 10.27,
-      "plays": 17,
+      "yards": 18,
+      "liveSeconds": 3.26,
+      "plays": 7,
       "cuts": 0,
       "gains": [
-        4,
+        2,
         6,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
         2,
         2,
         2,
@@ -1338,21 +901,11 @@
       "seed": 7028,
       "style": "straight",
       "result": "downs",
-      "yards": 52.2,
-      "liveSeconds": 9.57,
-      "plays": 14,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        12,
-        3,
-        3,
-        3,
-        3,
         2,
         2,
         2,
@@ -1363,25 +916,11 @@
       "seed": 7165,
       "style": "straight",
       "result": "downs",
-      "yards": 69.8,
-      "liveSeconds": 12.38,
-      "plays": 18,
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        6,
-        6,
-        7,
-        3,
-        3,
-        10,
-        2,
-        5,
-        2,
-        2,
         2,
         2,
         2,
@@ -1391,30 +930,15 @@
     {
       "seed": 7302,
       "style": "straight",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 13.48,
-      "plays": 20,
+      "result": "downs",
+      "yards": 8,
+      "liveSeconds": 1.53,
+      "plays": 4,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        9,
-        10,
-        5,
         2,
         2,
         2,
-        2,
-        5,
         2
       ]
     },
@@ -1423,25 +947,23 @@
       "style": "straight",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 13.48,
-      "plays": 20,
+      "liveSeconds": 12.65,
+      "plays": 18,
       "cuts": 0,
       "gains": [
-        4,
-        4,
-        4,
-        9,
-        3,
-        3,
-        3,
-        3,
-        3,
-        10,
+        2,
+        2,
         2,
         9,
         2,
+        12,
+        2,
+        6,
         2,
         2,
+        8,
+        9,
+        4,
         6,
         2,
         2,
@@ -1452,25 +974,14 @@
       "seed": 7576,
       "style": "straight",
       "result": "downs",
-      "yards": 67.8,
-      "liveSeconds": 12.31,
-      "plays": 18,
+      "yards": 18,
+      "liveSeconds": 3.37,
+      "plays": 7,
       "cuts": 0,
       "gains": [
-        4,
-        9,
-        6,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
+        2,
         6,
         2,
-        9,
         2,
         2,
         2,
@@ -1481,23 +992,12 @@
       "seed": 7713,
       "style": "straight",
       "result": "downs",
-      "yards": 55.1,
-      "liveSeconds": 10.48,
-      "plays": 16,
+      "yards": 21,
+      "liveSeconds": 3.47,
+      "plays": 5,
       "cuts": 0,
       "gains": [
-        14,
-        4,
-        4,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        2,
+        13,
         2,
         2,
         2,
@@ -1509,18 +1009,18 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.59,
+      "liveSeconds": 11.69,
       "plays": 9,
-      "cuts": 13,
+      "cuts": 38,
       "gains": [
         6,
-        10,
         6,
-        20,
-        12,
-        6,
-        6,
-        5
+        9,
+        5,
+        34,
+        7,
+        2,
+        4
       ]
     },
     {
@@ -1528,17 +1028,14 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.51,
-      "plays": 8,
-      "cuts": 13,
+      "liveSeconds": 10.93,
+      "plays": 5,
+      "cuts": 24,
       "gains": [
         6,
-        17,
-        18,
-        6,
-        13,
-        5,
-        5
+        49,
+        4,
+        16
       ]
     },
     {
@@ -1546,14 +1043,13 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.23,
-      "plays": 5,
-      "cuts": 13,
+      "liveSeconds": 11.13,
+      "plays": 4,
+      "cuts": 22,
       "gains": [
         9,
-        6,
-        13,
-        39
+        5,
+        5
       ]
     },
     {
@@ -1561,15 +1057,14 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.37,
-      "plays": 6,
-      "cuts": 13,
+      "liveSeconds": 11.18,
+      "plays": 5,
+      "cuts": 19,
       "gains": [
         6,
-        20,
-        16,
-        9,
-        20
+        35,
+        10,
+        5
       ]
     },
     {
@@ -1577,15 +1072,15 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.28,
+      "liveSeconds": 11.19,
       "plays": 6,
-      "cuts": 15,
+      "cuts": 22,
       "gains": [
         6,
-        31,
+        21,
+        34,
         9,
-        18,
-        5
+        4
       ]
     },
     {
@@ -1593,16 +1088,15 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.49,
-      "plays": 7,
-      "cuts": 17,
+      "liveSeconds": 11.41,
+      "plays": 6,
+      "cuts": 27,
       "gains": [
-        14,
-        10,
-        13,
-        23,
-        6,
-        6
+        32,
+        18,
+        7,
+        4,
+        5
       ]
     },
     {
@@ -1610,17 +1104,18 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.48,
-      "plays": 8,
-      "cuts": 12,
+      "liveSeconds": 11.86,
+      "plays": 9,
+      "cuts": 32,
       "gains": [
         6,
-        18,
-        19,
         6,
-        15,
-        6,
-        5
+        9,
+        10,
+        13,
+        9,
+        4,
+        4
       ]
     },
     {
@@ -1628,17 +1123,15 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.79,
-      "plays": 8,
-      "cuts": 13,
+      "liveSeconds": 11.53,
+      "plays": 6,
+      "cuts": 25,
       "gains": [
         6,
+        5,
         6,
-        6,
-        16,
-        10,
-        6,
-        14
+        33,
+        4
       ]
     },
     {
@@ -1646,16 +1139,15 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.48,
-      "plays": 7,
-      "cuts": 14,
+      "liveSeconds": 11.34,
+      "plays": 6,
+      "cuts": 26,
       "gains": [
         6,
-        16,
-        16,
-        17,
-        5,
-        13
+        36,
+        2,
+        10,
+        5
       ]
     },
     {
@@ -1663,16 +1155,11 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.7,
-      "plays": 8,
-      "cuts": 12,
+      "liveSeconds": 10.88,
+      "plays": 3,
+      "cuts": 15,
       "gains": [
-        10,
-        6,
-        6,
-        16,
-        6,
-        15,
+        60,
         5
       ]
     },
@@ -1681,16 +1168,21 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.43,
-      "plays": 7,
-      "cuts": 13,
+      "liveSeconds": 12.15,
+      "plays": 12,
+      "cuts": 47,
       "gains": [
         6,
-        6,
-        18,
-        30,
         5,
-        7
+        17,
+        16,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4,
+        4
       ]
     },
     {
@@ -1698,19 +1190,16 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.85,
-      "plays": 10,
-      "cuts": 16,
+      "liveSeconds": 11.17,
+      "plays": 7,
+      "cuts": 29,
       "gains": [
         6,
-        14,
-        6,
         13,
-        6,
-        10,
+        13,
         5,
-        5,
-        6
+        34,
+        4
       ]
     },
     {
@@ -1718,19 +1207,16 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.93,
-      "plays": 10,
-      "cuts": 14,
+      "liveSeconds": 11.37,
+      "plays": 7,
+      "cuts": 20,
       "gains": [
-        6,
-        21,
-        11,
         10,
+        28,
         6,
-        2,
-        2,
-        5,
-        6
+        20,
+        4,
+        4
       ]
     },
     {
@@ -1738,14 +1224,11 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.33,
-      "plays": 6,
-      "cuts": 13,
+      "liveSeconds": 10.89,
+      "plays": 3,
+      "cuts": 16,
       "gains": [
-        36,
-        16,
-        9,
-        5,
+        24,
         5
       ]
     },
@@ -1754,15 +1237,18 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.3,
-      "plays": 6,
-      "cuts": 15,
+      "liveSeconds": 11.97,
+      "plays": 9,
+      "cuts": 34,
       "gains": [
         6,
-        35,
-        6,
-        6,
-        13
+        17,
+        5,
+        10,
+        4,
+        4,
+        4,
+        22
       ]
     },
     {
@@ -1770,16 +1256,19 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.65,
-      "plays": 7,
-      "cuts": 12,
+      "liveSeconds": 11.94,
+      "plays": 10,
+      "cuts": 37,
       "gains": [
-        19,
+        6,
         20,
-        6,
-        15,
-        6,
-        6
+        13,
+        8,
+        4,
+        4,
+        4,
+        13,
+        2
       ]
     },
     {
@@ -1787,17 +1276,17 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.53,
+      "liveSeconds": 11.46,
       "plays": 8,
-      "cuts": 14,
+      "cuts": 24,
       "gains": [
-        10,
-        21,
-        14,
         13,
-        5,
-        5,
-        5
+        35,
+        10,
+        4,
+        4,
+        4,
+        2
       ]
     },
     {
@@ -1805,15 +1294,13 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.15,
-      "plays": 6,
-      "cuts": 15,
+      "liveSeconds": 11.08,
+      "plays": 4,
+      "cuts": 21,
       "gains": [
         6,
-        10,
         6,
-        36,
-        17
+        15
       ]
     },
     {
@@ -1821,552 +1308,512 @@
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.72,
+      "liveSeconds": 12,
       "plays": 9,
-      "cuts": 13,
+      "cuts": 34,
       "gains": [
-        6,
-        6,
-        14,
-        15,
-        6,
+        10,
+        5,
+        5,
         6,
         13,
-        5
+        13,
+        4,
+        15
       ]
     },
     {
       "seed": 3603,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.48,
-      "plays": 7,
-      "cuts": 13,
-      "gains": [
-        6,
-        14,
-        20,
-        6,
-        21,
-        5
-      ]
-    },
-    {
-      "seed": 3740,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.59,
-      "plays": 10,
-      "cuts": 16,
-      "gains": [
-        6,
-        6,
-        6,
-        10,
-        20,
-        6,
-        2,
-        13,
-        6
-      ]
-    },
-    {
-      "seed": 3877,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.36,
-      "plays": 7,
-      "cuts": 15,
-      "gains": [
-        6,
-        6,
-        6,
-        6,
-        23,
-        21
-      ]
-    },
-    {
-      "seed": 4014,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.64,
-      "plays": 8,
-      "cuts": 14,
-      "gains": [
-        6,
-        18,
-        17,
-        6,
-        12,
-        5,
-        6
-      ]
-    },
-    {
-      "seed": 4151,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.42,
-      "plays": 7,
-      "cuts": 15,
-      "gains": [
-        10,
-        10,
-        16,
-        16,
-        13,
-        6
-      ]
-    },
-    {
-      "seed": 4288,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.38,
-      "plays": 7,
-      "cuts": 15,
-      "gains": [
-        6,
-        6,
-        32,
-        6,
-        6,
-        13
-      ]
-    },
-    {
-      "seed": 4425,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.53,
-      "plays": 8,
-      "cuts": 14,
-      "gains": [
-        6,
-        21,
-        10,
-        10,
-        6,
-        6,
-        11
-      ]
-    },
-    {
-      "seed": 4562,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.63,
-      "plays": 8,
-      "cuts": 12,
-      "gains": [
-        9,
-        14,
-        24,
-        9,
-        5,
-        5,
-        6
-      ]
-    },
-    {
-      "seed": 4699,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.09,
-      "plays": 5,
-      "cuts": 15,
-      "gains": [
-        20,
-        13,
-        22,
-        17
-      ]
-    },
-    {
-      "seed": 4836,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.6,
-      "plays": 9,
-      "cuts": 11,
-      "gains": [
-        6,
-        6,
-        6,
-        13,
-        9,
-        10,
-        6,
-        16
-      ]
-    },
-    {
-      "seed": 4973,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.28,
-      "plays": 5,
-      "cuts": 12,
-      "gains": [
-        36,
-        17,
-        14,
-        2
-      ]
-    },
-    {
-      "seed": 5110,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.18,
-      "plays": 7,
-      "cuts": 15,
-      "gains": [
-        20,
-        14,
-        24,
-        5,
-        6,
-        6
-      ]
-    },
-    {
-      "seed": 5247,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.55,
-      "plays": 8,
-      "cuts": 17,
-      "gains": [
-        29,
-        13,
-        6,
-        10,
-        5,
-        5,
-        5
-      ]
-    },
-    {
-      "seed": 5384,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 12.04,
-      "plays": 11,
-      "cuts": 14,
-      "gains": [
-        6,
-        6,
-        6,
-        6,
-        19,
-        6,
-        5,
-        9,
-        6,
-        5
-      ]
-    },
-    {
-      "seed": 5521,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.89,
-      "plays": 10,
-      "cuts": 14,
-      "gains": [
-        6,
-        6,
-        19,
-        14,
-        6,
-        5,
-        6,
-        6,
-        5
-      ]
-    },
-    {
-      "seed": 5658,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.18,
-      "plays": 5,
-      "cuts": 13,
-      "gains": [
-        25,
-        19,
-        6,
-        13
-      ]
-    },
-    {
-      "seed": 5795,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.38,
-      "plays": 7,
-      "cuts": 17,
-      "gains": [
-        6,
-        25,
-        13,
-        6,
-        12,
-        9
-      ]
-    },
-    {
-      "seed": 5932,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.18,
-      "plays": 5,
-      "cuts": 16,
-      "gains": [
-        6,
-        6,
-        49,
-        6
-      ]
-    },
-    {
-      "seed": 6069,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.5,
-      "plays": 7,
-      "cuts": 14,
-      "gains": [
-        6,
-        6,
-        14,
-        22,
-        6,
-        5
-      ]
-    },
-    {
-      "seed": 6206,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.63,
-      "plays": 9,
-      "cuts": 19,
-      "gains": [
-        6,
-        6,
-        6,
-        6,
-        13,
-        10,
-        17,
-        9
-      ]
-    },
-    {
-      "seed": 6343,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.53,
-      "plays": 8,
-      "cuts": 12,
-      "gains": [
-        6,
-        6,
-        17,
-        10,
-        6,
-        17,
-        11
-      ]
-    },
-    {
-      "seed": 6480,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.53,
-      "plays": 8,
-      "cuts": 19,
-      "gains": [
-        14,
-        6,
-        17,
-        13,
-        6,
-        13,
-        6
-      ]
-    },
-    {
-      "seed": 6617,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.29,
-      "plays": 5,
-      "cuts": 15,
-      "gains": [
-        19,
-        31,
-        5,
-        16
-      ]
-    },
-    {
-      "seed": 6754,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.34,
-      "plays": 7,
-      "cuts": 15,
-      "gains": [
-        14,
-        13,
-        19,
-        10,
-        12,
-        5
-      ]
-    },
-    {
-      "seed": 6891,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.22,
-      "plays": 6,
-      "cuts": 15,
-      "gains": [
-        16,
-        6,
-        24,
-        20,
-        5
-      ]
-    },
-    {
-      "seed": 7028,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.45,
-      "plays": 7,
-      "cuts": 10,
-      "gains": [
-        19,
-        6,
-        31,
-        6,
-        5,
-        5
-      ]
-    },
-    {
-      "seed": 7165,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.38,
-      "plays": 6,
-      "cuts": 17,
-      "gains": [
-        19,
-        13,
-        12,
-        19,
-        10
-      ]
-    },
-    {
-      "seed": 7302,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.64,
-      "plays": 9,
-      "cuts": 15,
-      "gains": [
-        6,
-        10,
-        6,
-        17,
-        13,
-        9,
-        6,
-        5
-      ]
-    },
-    {
-      "seed": 7439,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.2,
-      "plays": 5,
-      "cuts": 10,
-      "gains": [
-        6,
-        45,
-        12,
-        10
-      ]
-    },
-    {
-      "seed": 7576,
-      "style": "reactive",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.48,
-      "plays": 8,
-      "cuts": 16,
-      "gains": [
-        25,
-        13,
-        6,
-        9,
-        6,
-        10,
-        6
-      ]
-    },
-    {
-      "seed": 7713,
       "style": "reactive",
       "result": "touchdown",
       "yards": 75,
       "liveSeconds": 11.19,
       "plays": 5,
+      "cuts": 27,
+      "gains": [
+        6,
+        28,
+        34,
+        4
+      ]
+    },
+    {
+      "seed": 3740,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.59,
+      "plays": 8,
+      "cuts": 33,
+      "gains": [
+        6,
+        20,
+        24,
+        4,
+        4,
+        7,
+        5
+      ]
+    },
+    {
+      "seed": 3877,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.88,
+      "plays": 9,
+      "cuts": 40,
+      "gains": [
+        6,
+        5,
+        5,
+        5,
+        29,
+        4,
+        13,
+        5
+      ]
+    },
+    {
+      "seed": 4014,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.71,
+      "plays": 10,
+      "cuts": 42,
+      "gains": [
+        6,
+        19,
+        17,
+        4,
+        12,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "seed": 4151,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.32,
+      "plays": 7,
+      "cuts": 32,
+      "gains": [
+        10,
+        10,
+        30,
+        12,
+        5,
+        4
+      ]
+    },
+    {
+      "seed": 4288,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.16,
+      "plays": 5,
+      "cuts": 20,
+      "gains": [
+        6,
+        5,
+        16,
+        46
+      ]
+    },
+    {
+      "seed": 4425,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.57,
+      "plays": 9,
+      "cuts": 29,
+      "gains": [
+        6,
+        10,
+        6,
+        16,
+        23,
+        4,
+        5,
+        4
+      ]
+    },
+    {
+      "seed": 4562,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.33,
+      "plays": 5,
+      "cuts": 22,
+      "gains": [
+        9,
+        5,
+        5,
+        22
+      ]
+    },
+    {
+      "seed": 4699,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.28,
+      "plays": 6,
+      "cuts": 26,
+      "gains": [
+        19,
+        9,
+        13,
+        29,
+        4
+      ]
+    },
+    {
+      "seed": 4836,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.74,
+      "plays": 7,
+      "cuts": 25,
+      "gains": [
+        6,
+        5,
+        5,
+        26,
+        10,
+        10
+      ]
+    },
+    {
+      "seed": 4973,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.33,
+      "plays": 6,
+      "cuts": 20,
+      "gains": [
+        21,
+        32,
+        6,
+        5,
+        4
+      ]
+    },
+    {
+      "seed": 5110,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.47,
+      "plays": 7,
+      "cuts": 22,
+      "gains": [
+        28,
+        18,
+        6,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "seed": 5247,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.67,
+      "plays": 7,
+      "cuts": 27,
+      "gains": [
+        10,
+        6,
+        5,
+        9,
+        20,
+        4
+      ]
+    },
+    {
+      "seed": 5384,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.83,
+      "plays": 9,
+      "cuts": 33,
+      "gains": [
+        6,
+        6,
+        9,
+        16,
+        18,
+        4,
+        5,
+        4
+      ]
+    },
+    {
+      "seed": 5521,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.07,
+      "plays": 4,
+      "cuts": 19,
+      "gains": [
+        6,
+        5,
+        16
+      ]
+    },
+    {
+      "seed": 5658,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.32,
+      "plays": 5,
+      "cuts": 29,
+      "gains": [
+        16,
+        5,
+        13,
+        8
+      ]
+    },
+    {
+      "seed": 5795,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.55,
+      "plays": 8,
+      "cuts": 35,
+      "gains": [
+        6,
+        36,
+        9,
+        4,
+        9,
+        4,
+        4
+      ]
+    },
+    {
+      "seed": 5932,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.36,
+      "plays": 6,
+      "cuts": 28,
+      "gains": [
+        16,
+        26,
+        18,
+        4,
+        7
+      ]
+    },
+    {
+      "seed": 6069,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.68,
+      "plays": 8,
+      "cuts": 38,
+      "gains": [
+        6,
+        5,
+        13,
+        25,
+        7,
+        4,
+        4
+      ]
+    },
+    {
+      "seed": 6206,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.6,
+      "plays": 1,
+      "cuts": 8,
+      "gains": []
+    },
+    {
+      "seed": 6343,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.53,
+      "plays": 7,
+      "cuts": 32,
+      "gains": [
+        6,
+        5,
+        30,
+        10,
+        7,
+        4
+      ]
+    },
+    {
+      "seed": 6480,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.11,
+      "plays": 4,
+      "cuts": 22,
+      "gains": [
+        35,
+        8,
+        29
+      ]
+    },
+    {
+      "seed": 6617,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.3,
+      "plays": 6,
+      "cuts": 27,
+      "gains": [
+        13,
+        16,
+        36,
+        4,
+        4
+      ]
+    },
+    {
+      "seed": 6754,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.6,
+      "plays": 1,
+      "cuts": 11,
+      "gains": []
+    },
+    {
+      "seed": 6891,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.24,
+      "plays": 6,
+      "cuts": 26,
+      "gains": [
+        21,
+        16,
+        16,
+        9,
+        9
+      ]
+    },
+    {
+      "seed": 7028,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.83,
+      "plays": 2,
+      "cuts": 12,
+      "gains": [
+        25
+      ]
+    },
+    {
+      "seed": 7165,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.83,
+      "plays": 2,
       "cuts": 14,
       "gains": [
-        20,
-        31,
+        36
+      ]
+    },
+    {
+      "seed": 7302,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.83,
+      "plays": 9,
+      "cuts": 30,
+      "gains": [
+        6,
+        6,
+        10,
         5,
-        6
+        20,
+        4,
+        16,
+        4
+      ]
+    },
+    {
+      "seed": 7439,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.04,
+      "plays": 4,
+      "cuts": 16,
+      "gains": [
+        9,
+        30,
+        13
+      ]
+    },
+    {
+      "seed": 7576,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.94,
+      "plays": 5,
+      "cuts": 24,
+      "gains": [
+        62,
+        4,
+        5,
+        4
+      ]
+    },
+    {
+      "seed": 7713,
+      "style": "reactive",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.62,
+      "plays": 8,
+      "cuts": 35,
+      "gains": [
+        35,
+        15,
+        4,
+        4,
+        4,
+        2,
+        4
       ]
     },
     {
@@ -2374,12 +1821,14 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.87,
-      "plays": 3,
-      "cuts": 17,
+      "liveSeconds": 11.18,
+      "plays": 5,
+      "cuts": 35,
       "gains": [
-        69,
-        5
+        25,
+        5,
+        12,
+        6
       ]
     },
     {
@@ -2387,25 +1836,21 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.16,
-      "plays": 4,
-      "cuts": 19,
-      "gains": [
-        33,
-        10,
-        6
-      ]
+      "liveSeconds": 10.6,
+      "plays": 1,
+      "cuts": 16,
+      "gains": []
     },
     {
       "seed": 1274,
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.8,
+      "liveSeconds": 10.72,
       "plays": 2,
-      "cuts": 20,
+      "cuts": 24,
       "gains": [
-        28
+        68
       ]
     },
     {
@@ -2413,344 +1858,19 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.92,
-      "plays": 3,
-      "cuts": 18,
+      "liveSeconds": 11.29,
+      "plays": 6,
+      "cuts": 30,
       "gains": [
-        35,
-        30
+        19,
+        12,
+        10,
+        10,
+        20
       ]
     },
     {
       "seed": 1548,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.73,
-      "plays": 2,
-      "cuts": 25,
-      "gains": [
-        25
-      ]
-    },
-    {
-      "seed": 1685,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.17,
-      "plays": 4,
-      "cuts": 21,
-      "gains": [
-        14,
-        25,
-        33
-      ]
-    },
-    {
-      "seed": 1822,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.88,
-      "plays": 3,
-      "cuts": 22,
-      "gains": [
-        10,
-        34
-      ]
-    },
-    {
-      "seed": 1959,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.83,
-      "plays": 2,
-      "cuts": 23,
-      "gains": [
-        36
-      ]
-    },
-    {
-      "seed": 2096,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.07,
-      "plays": 4,
-      "cuts": 27,
-      "gains": [
-        25,
-        29,
-        9
-      ]
-    },
-    {
-      "seed": 2233,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.15,
-      "plays": 5,
-      "cuts": 22,
-      "gains": [
-        10,
-        37,
-        13,
-        14
-      ]
-    },
-    {
-      "seed": 2370,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.38,
-      "plays": 6,
-      "cuts": 19,
-      "gains": [
-        10,
-        14,
-        32,
-        6,
-        10
-      ]
-    },
-    {
-      "seed": 2507,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.21,
-      "plays": 4,
-      "cuts": 21,
-      "gains": [
-        19,
-        20,
-        6
-      ]
-    },
-    {
-      "seed": 2644,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.01,
-      "plays": 4,
-      "cuts": 23,
-      "gains": [
-        10,
-        44,
-        9
-      ]
-    },
-    {
-      "seed": 2781,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.13,
-      "plays": 4,
-      "cuts": 20,
-      "gains": [
-        44,
-        12,
-        12
-      ]
-    },
-    {
-      "seed": 2918,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.95,
-      "plays": 3,
-      "cuts": 16,
-      "gains": [
-        14,
-        21
-      ]
-    },
-    {
-      "seed": 3055,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.61,
-      "plays": 7,
-      "cuts": 20,
-      "gains": [
-        14,
-        14,
-        11,
-        16,
-        6,
-        9
-      ]
-    },
-    {
-      "seed": 3192,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.88,
-      "plays": 3,
-      "cuts": 24,
-      "gains": [
-        10,
-        56
-      ]
-    },
-    {
-      "seed": 3329,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.02,
-      "plays": 4,
-      "cuts": 20,
-      "gains": [
-        24,
-        36,
-        6
-      ]
-    },
-    {
-      "seed": 3466,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.64,
-      "plays": 7,
-      "cuts": 27,
-      "gains": [
-        10,
-        13,
-        19,
-        13,
-        6,
-        10
-      ]
-    },
-    {
-      "seed": 3603,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.83,
-      "plays": 2,
-      "cuts": 25,
-      "gains": [
-        14
-      ]
-    },
-    {
-      "seed": 3740,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.93,
-      "plays": 3,
-      "cuts": 16,
-      "gains": [
-        10,
-        56
-      ]
-    },
-    {
-      "seed": 3877,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 10.87,
-      "plays": 3,
-      "cuts": 20,
-      "gains": [
-        18,
-        38
-      ]
-    },
-    {
-      "seed": 4014,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.14,
-      "plays": 4,
-      "cuts": 25,
-      "gains": [
-        14,
-        14,
-        11
-      ]
-    },
-    {
-      "seed": 4151,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.26,
-      "plays": 5,
-      "cuts": 24,
-      "gains": [
-        10,
-        13,
-        36,
-        9
-      ]
-    },
-    {
-      "seed": 4288,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.33,
-      "plays": 6,
-      "cuts": 24,
-      "gains": [
-        10,
-        26,
-        10,
-        10,
-        11
-      ]
-    },
-    {
-      "seed": 4425,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.64,
-      "plays": 7,
-      "cuts": 21,
-      "gains": [
-        25,
-        11,
-        10,
-        6,
-        6,
-        10
-      ]
-    },
-    {
-      "seed": 4562,
-      "style": "reader",
-      "result": "touchdown",
-      "yards": 75,
-      "liveSeconds": 11.43,
-      "plays": 6,
-      "cuts": 20,
-      "gains": [
-        14,
-        14,
-        31,
-        6,
-        6
-      ]
-    },
-    {
-      "seed": 4699,
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
@@ -2760,16 +1880,320 @@
       "gains": []
     },
     {
-      "seed": 4836,
+      "seed": 1685,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.6,
+      "plays": 1,
+      "cuts": 22,
+      "gains": []
+    },
+    {
+      "seed": 1822,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.91,
+      "plays": 3,
+      "cuts": 29,
+      "gains": [
+        10,
+        47
+      ]
+    },
+    {
+      "seed": 1959,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.05,
+      "plays": 4,
+      "cuts": 22,
+      "gains": [
+        28,
+        16,
+        17
+      ]
+    },
+    {
+      "seed": 2096,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.89,
+      "plays": 3,
+      "cuts": 29,
+      "gains": [
+        24,
+        5
+      ]
+    },
+    {
+      "seed": 2233,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.78,
+      "plays": 2,
+      "cuts": 16,
+      "gains": [
+        32
+      ]
+    },
+    {
+      "seed": 2370,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.6,
+      "plays": 1,
+      "cuts": 21,
+      "gains": []
+    },
+    {
+      "seed": 2507,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.77,
+      "plays": 2,
+      "cuts": 22,
+      "gains": [
+        58
+      ]
+    },
+    {
+      "seed": 2644,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.09,
+      "plays": 4,
+      "cuts": 26,
+      "gains": [
+        10,
+        21,
+        12
+      ]
+    },
+    {
+      "seed": 2781,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.05,
+      "plays": 4,
+      "cuts": 28,
+      "gains": [
+        29,
+        33,
+        12
+      ]
+    },
+    {
+      "seed": 2918,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.18,
+      "plays": 4,
+      "cuts": 29,
+      "gains": [
+        14,
+        21,
+        8
+      ]
+    },
+    {
+      "seed": 3055,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.43,
+      "plays": 6,
+      "cuts": 41,
+      "gains": [
+        14,
+        14,
+        11,
+        18,
+        6
+      ]
+    },
+    {
+      "seed": 3192,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.98,
+      "plays": 3,
+      "cuts": 27,
+      "gains": [
+        33,
+        35
+      ]
+    },
+    {
+      "seed": 3329,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.95,
+      "plays": 3,
+      "cuts": 30,
+      "gains": [
+        60,
+        5
+      ]
+    },
+    {
+      "seed": 3466,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.9,
+      "plays": 3,
+      "cuts": 32,
+      "gains": [
+        41,
+        25
+      ]
+    },
+    {
+      "seed": 3603,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.98,
+      "plays": 3,
+      "cuts": 26,
+      "gains": [
+        51,
+        11
+      ]
+    },
+    {
+      "seed": 3740,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.95,
+      "plays": 4,
+      "cuts": 26,
+      "gains": [
+        10,
+        35,
+        29
+      ]
+    },
+    {
+      "seed": 3877,
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
       "liveSeconds": 10.96,
-      "plays": 3,
-      "cuts": 20,
+      "plays": 4,
+      "cuts": 33,
       "gains": [
-        44,
-        24
+        53,
+        6,
+        9
+      ]
+    },
+    {
+      "seed": 4014,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11,
+      "plays": 3,
+      "cuts": 24,
+      "gains": [
+        14,
+        44
+      ]
+    },
+    {
+      "seed": 4151,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.85,
+      "plays": 3,
+      "cuts": 32,
+      "gains": [
+        10,
+        19
+      ]
+    },
+    {
+      "seed": 4288,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.73,
+      "plays": 2,
+      "cuts": 25,
+      "gains": [
+        10
+      ]
+    },
+    {
+      "seed": 4425,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.72,
+      "plays": 2,
+      "cuts": 24,
+      "gains": [
+        20
+      ]
+    },
+    {
+      "seed": 4562,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 10.94,
+      "plays": 3,
+      "cuts": 26,
+      "gains": [
+        25,
+        40
+      ]
+    },
+    {
+      "seed": 4699,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.12,
+      "plays": 4,
+      "cuts": 35,
+      "gains": [
+        32,
+        9,
+        19
+      ]
+    },
+    {
+      "seed": 4836,
+      "style": "reader",
+      "result": "touchdown",
+      "yards": 75,
+      "liveSeconds": 11.76,
+      "plays": 8,
+      "cuts": 43,
+      "gains": [
+        12,
+        5,
+        9,
+        5,
+        14,
+        13,
+        15
       ]
     },
     {
@@ -2777,14 +2201,11 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.24,
-      "plays": 5,
-      "cuts": 23,
+      "liveSeconds": 10.73,
+      "plays": 2,
+      "cuts": 19,
       "gains": [
-        36,
-        17,
-        6,
-        6
+        46
       ]
     },
     {
@@ -2792,15 +2213,13 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.22,
-      "plays": 6,
-      "cuts": 16,
+      "liveSeconds": 11.03,
+      "plays": 4,
+      "cuts": 31,
       "gains": [
         20,
-        14,
-        12,
-        10,
-        9
+        5,
+        5
       ]
     },
     {
@@ -2808,12 +2227,12 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.84,
+      "liveSeconds": 11,
       "plays": 3,
       "cuts": 25,
       "gains": [
-        48,
-        10
+        35,
+        20
       ]
     },
     {
@@ -2821,25 +2240,21 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.78,
-      "plays": 2,
-      "cuts": 28,
-      "gains": [
-        52
-      ]
+      "liveSeconds": 10.6,
+      "plays": 1,
+      "cuts": 17,
+      "gains": []
     },
     {
       "seed": 5521,
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.99,
-      "plays": 4,
-      "cuts": 28,
+      "liveSeconds": 10.73,
+      "plays": 2,
+      "cuts": 24,
       "gains": [
-        21,
-        24,
-        6
+        55
       ]
     },
     {
@@ -2847,13 +2262,12 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.05,
-      "plays": 4,
-      "cuts": 13,
+      "liveSeconds": 10.85,
+      "plays": 3,
+      "cuts": 18,
       "gains": [
         25,
-        19,
-        6
+        19
       ]
     },
     {
@@ -2861,16 +2275,13 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.47,
-      "plays": 7,
-      "cuts": 25,
+      "liveSeconds": 11.16,
+      "plays": 4,
+      "cuts": 32,
       "gains": [
         15,
-        13,
-        25,
-        6,
-        6,
-        6
+        5,
+        9
       ]
     },
     {
@@ -2880,11 +2291,11 @@
       "yards": 75,
       "liveSeconds": 11.02,
       "plays": 4,
-      "cuts": 21,
+      "cuts": 36,
       "gains": [
-        25,
-        12,
-        23
+        45,
+        6,
+        6
       ]
     },
     {
@@ -2892,13 +2303,11 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.03,
-      "plays": 4,
-      "cuts": 22,
+      "liveSeconds": 10.71,
+      "plays": 2,
+      "cuts": 30,
       "gains": [
-        25,
-        39,
-        10
+        53
       ]
     },
     {
@@ -2906,13 +2315,12 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.26,
-      "plays": 5,
-      "cuts": 25,
+      "liveSeconds": 11.07,
+      "plays": 4,
+      "cuts": 33,
       "gains": [
-        24,
-        10,
-        10,
+        43,
+        9,
         14
       ]
     },
@@ -2921,14 +2329,14 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.2,
+      "liveSeconds": 11.14,
       "plays": 5,
-      "cuts": 18,
+      "cuts": 37,
       "gains": [
         16,
         9,
-        11,
-        14
+        31,
+        8
       ]
     },
     {
@@ -2936,12 +2344,11 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.92,
-      "plays": 3,
-      "cuts": 26,
+      "liveSeconds": 10.77,
+      "plays": 2,
+      "cuts": 23,
       "gains": [
-        60,
-        14
+        57
       ]
     },
     {
@@ -2949,15 +2356,17 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.33,
-      "plays": 6,
-      "cuts": 22,
+      "liveSeconds": 11.79,
+      "plays": 8,
+      "cuts": 39,
       "gains": [
         14,
-        13,
-        23,
+        5,
+        12,
+        10,
+        7,
         9,
-        6
+        5
       ]
     },
     {
@@ -2965,14 +2374,12 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.2,
-      "plays": 5,
-      "cuts": 23,
+      "liveSeconds": 10.99,
+      "plays": 3,
+      "cuts": 21,
       "gains": [
-        14,
-        30,
-        13,
-        6
+        11,
+        48
       ]
     },
     {
@@ -2980,13 +2387,12 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.08,
-      "plays": 4,
-      "cuts": 26,
+      "liveSeconds": 10.87,
+      "plays": 3,
+      "cuts": 21,
       "gains": [
-        14,
-        33,
-        6
+        13,
+        42
       ]
     },
     {
@@ -2994,13 +2400,12 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.12,
-      "plays": 4,
-      "cuts": 19,
+      "liveSeconds": 10.97,
+      "plays": 3,
+      "cuts": 22,
       "gains": [
         19,
-        17,
-        14
+        43
       ]
     },
     {
@@ -3008,22 +2413,24 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.6,
-      "plays": 1,
-      "cuts": 23,
-      "gains": []
+      "liveSeconds": 11.01,
+      "plays": 3,
+      "cuts": 29,
+      "gains": [
+        63,
+        10
+      ]
     },
     {
       "seed": 7302,
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.89,
-      "plays": 3,
-      "cuts": 17,
+      "liveSeconds": 10.83,
+      "plays": 2,
+      "cuts": 26,
       "gains": [
-        45,
-        27
+        57
       ]
     },
     {
@@ -3031,14 +2438,11 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.22,
-      "plays": 5,
-      "cuts": 20,
+      "liveSeconds": 10.73,
+      "plays": 2,
+      "cuts": 23,
       "gains": [
-        10,
-        34,
-        6,
-        5
+        10
       ]
     },
     {
@@ -3046,12 +2450,13 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.96,
-      "plays": 3,
-      "cuts": 23,
+      "liveSeconds": 11.12,
+      "plays": 4,
+      "cuts": 28,
       "gains": [
-        41,
-        33
+        44,
+        16,
+        9
       ]
     },
     {
@@ -3059,14 +2464,15 @@
       "style": "reader",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 11.1,
-      "plays": 5,
-      "cuts": 21,
+      "liveSeconds": 11.22,
+      "plays": 6,
+      "cuts": 36,
       "gains": [
         20,
         14,
-        27,
-        6
+        21,
+        6,
+        9
       ]
     },
     {
@@ -3074,11 +2480,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 9.98,
-      "plays": 2,
-      "cuts": 21,
+      "liveSeconds": 10.59,
+      "plays": 5,
+      "cuts": 33,
       "gains": [
-        62
+        41,
+        10,
+        6,
+        4
       ]
     },
     {
@@ -3086,14 +2495,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.33,
-      "plays": 5,
-      "cuts": 17,
+      "liveSeconds": 10.29,
+      "plays": 4,
+      "cuts": 28,
       "gains": [
         22,
-        32,
-        14,
-        6
+        43,
+        7
       ]
     },
     {
@@ -3101,12 +2509,15 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.12,
-      "plays": 3,
-      "cuts": 15,
+      "liveSeconds": 10.53,
+      "plays": 6,
+      "cuts": 35,
       "gains": [
-        21,
-        25
+        7,
+        16,
+        10,
+        20,
+        21
       ]
     },
     {
@@ -3114,14 +2525,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.38,
-      "plays": 5,
-      "cuts": 19,
+      "liveSeconds": 10.45,
+      "plays": 4,
+      "cuts": 38,
       "gains": [
         6,
-        38,
-        15,
-        5
+        24,
+        43
       ]
     },
     {
@@ -3129,12 +2539,21 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.13,
-      "plays": 3,
-      "cuts": 20,
+      "liveSeconds": 11.52,
+      "plays": 12,
+      "cuts": 65,
       "gains": [
         6,
-        65
+        11,
+        5,
+        14,
+        7,
+        4,
+        6,
+        4,
+        6,
+        6,
+        6
       ]
     },
     {
@@ -3142,12 +2561,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.11,
-      "plays": 3,
-      "cuts": 21,
+      "liveSeconds": 10.22,
+      "plays": 4,
+      "cuts": 22,
       "gains": [
+        21,
         17,
-        44
+        35
       ]
     },
     {
@@ -3155,15 +2575,15 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.64,
+      "liveSeconds": 10.7,
       "plays": 7,
-      "cuts": 18,
+      "cuts": 40,
       "gains": [
         10,
         36,
+        4,
         6,
-        6,
-        11,
+        13,
         6
       ]
     },
@@ -3172,13 +2592,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.38,
+      "liveSeconds": 10.31,
       "plays": 4,
-      "cuts": 24,
+      "cuts": 26,
       "gains": [
-        60,
-        8,
-        6
+        37,
+        28,
+        4
       ]
     },
     {
@@ -3186,16 +2606,15 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.63,
-      "plays": 7,
-      "cuts": 22,
+      "liveSeconds": 10.67,
+      "plays": 6,
+      "cuts": 42,
       "gains": [
         6,
-        25,
-        23,
-        5,
-        5,
-        11
+        26,
+        14,
+        16,
+        5
       ]
     },
     {
@@ -3203,15 +2622,17 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.57,
-      "plays": 6,
-      "cuts": 19,
+      "liveSeconds": 10.85,
+      "plays": 8,
+      "cuts": 41,
       "gains": [
-        10,
-        10,
-        17,
-        11,
-        13
+        7,
+        13,
+        19,
+        16,
+        4,
+        5,
+        6
       ]
     },
     {
@@ -3220,12 +2641,13 @@
       "result": "touchdown",
       "yards": 75,
       "liveSeconds": 10.37,
-      "plays": 4,
-      "cuts": 20,
+      "plays": 5,
+      "cuts": 32,
       "gains": [
         6,
-        40,
-        6
+        41,
+        13,
+        9
       ]
     },
     {
@@ -3233,29 +2655,25 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.25,
-      "plays": 4,
-      "cuts": 19,
-      "gains": [
-        21,
-        36,
-        6
-      ]
+      "liveSeconds": 9.74,
+      "plays": 1,
+      "cuts": 13,
+      "gains": []
     },
     {
       "seed": 2644,
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.62,
+      "liveSeconds": 10.68,
       "plays": 6,
-      "cuts": 20,
+      "cuts": 33,
       "gains": [
         10,
         33,
         6,
-        16,
-        6
+        11,
+        5
       ]
     },
     {
@@ -3263,12 +2681,12 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.13,
+      "liveSeconds": 10.11,
       "plays": 3,
-      "cuts": 15,
+      "cuts": 24,
       "gains": [
         17,
-        34
+        56
       ]
     },
     {
@@ -3276,13 +2694,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.23,
+      "liveSeconds": 10.22,
       "plays": 4,
-      "cuts": 19,
+      "cuts": 21,
       "gains": [
         22,
-        22,
-        24
+        17,
+        31
       ]
     },
     {
@@ -3290,11 +2708,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.06,
-      "plays": 2,
-      "cuts": 21,
+      "liveSeconds": 10.25,
+      "plays": 4,
+      "cuts": 26,
       "gains": [
-        10
+        10,
+        20,
+        17
       ]
     },
     {
@@ -3302,17 +2722,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.8,
-      "plays": 8,
-      "cuts": 21,
+      "liveSeconds": 10.41,
+      "plays": 4,
+      "cuts": 38,
       "gains": [
-        10,
-        9,
-        13,
-        19,
-        13,
-        6,
-        5
+        7,
+        5,
+        20
       ]
     },
     {
@@ -3320,14 +2736,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.43,
+      "liveSeconds": 10.39,
       "plays": 5,
-      "cuts": 20,
+      "cuts": 28,
       "gains": [
         10,
         6,
-        24,
-        21
+        21,
+        22
       ]
     },
     {
@@ -3335,13 +2751,16 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.34,
-      "plays": 4,
-      "cuts": 24,
+      "liveSeconds": 10.68,
+      "plays": 7,
+      "cuts": 41,
       "gains": [
         6,
-        33,
-        30
+        7,
+        14,
+        17,
+        13,
+        9
       ]
     },
     {
@@ -3349,29 +2768,24 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.57,
-      "plays": 6,
-      "cuts": 22,
-      "gains": [
-        17,
-        18,
-        7,
-        15,
-        12
-      ]
+      "liveSeconds": 9.83,
+      "plays": 1,
+      "cuts": 19,
+      "gains": []
     },
     {
       "seed": 3740,
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.47,
-      "plays": 7,
-      "cuts": 17,
+      "liveSeconds": 10.76,
+      "plays": 8,
+      "cuts": 43,
       "gains": [
         10,
         10,
-        34,
+        13,
+        20,
         6,
         6,
         9
@@ -3382,12 +2796,12 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.07,
+      "liveSeconds": 10.1,
       "plays": 3,
-      "cuts": 18,
+      "cuts": 26,
       "gains": [
-        22,
-        36
+        37,
+        16
       ]
     },
     {
@@ -3395,23 +2809,26 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 9.8,
-      "plays": 1,
-      "cuts": 17,
-      "gains": []
+      "liveSeconds": 10.18,
+      "plays": 3,
+      "cuts": 25,
+      "gains": [
+        43,
+        31
+      ]
     },
     {
       "seed": 4151,
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.34,
+      "liveSeconds": 10.38,
       "plays": 4,
-      "cuts": 23,
+      "cuts": 33,
       "gains": [
         10,
-        53,
-        9
+        34,
+        4
       ]
     },
     {
@@ -3419,14 +2836,16 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.51,
-      "plays": 5,
-      "cuts": 20,
+      "liveSeconds": 10.77,
+      "plays": 7,
+      "cuts": 36,
       "gains": [
         10,
         6,
+        5,
+        33,
         6,
-        42
+        4
       ]
     },
     {
@@ -3434,26 +2853,24 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.08,
-      "plays": 3,
-      "cuts": 18,
-      "gains": [
-        35,
-        17
-      ]
+      "liveSeconds": 9.83,
+      "plays": 1,
+      "cuts": 19,
+      "gains": []
     },
     {
       "seed": 4562,
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.32,
-      "plays": 4,
-      "cuts": 19,
+      "liveSeconds": 10.45,
+      "plays": 5,
+      "cuts": 33,
       "gains": [
-        17,
-        6,
-        35
+        16,
+        5,
+        35,
+        6
       ]
     },
     {
@@ -3461,24 +2878,26 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 9.88,
-      "plays": 1,
-      "cuts": 22,
-      "gains": []
+      "liveSeconds": 10.18,
+      "plays": 3,
+      "cuts": 26,
+      "gains": [
+        35,
+        11
+      ]
     },
     {
       "seed": 4836,
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.39,
-      "plays": 5,
-      "cuts": 18,
+      "liveSeconds": 10.4,
+      "plays": 4,
+      "cuts": 32,
       "gains": [
-        36,
-        25,
-        6,
-        6
+        39,
+        7,
+        4
       ]
     },
     {
@@ -3486,12 +2905,12 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.15,
+      "liveSeconds": 10.21,
       "plays": 3,
-      "cuts": 20,
+      "cuts": 24,
       "gains": [
-        31,
-        24
+        48,
+        22
       ]
     },
     {
@@ -3499,12 +2918,11 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.03,
-      "plays": 3,
-      "cuts": 14,
+      "liveSeconds": 9.94,
+      "plays": 2,
+      "cuts": 18,
       "gains": [
-        51,
-        10
+        37
       ]
     },
     {
@@ -3512,14 +2930,11 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.49,
-      "plays": 5,
-      "cuts": 23,
+      "liveSeconds": 9.9,
+      "plays": 2,
+      "cuts": 18,
       "gains": [
-        13,
-        6,
-        14,
-        25
+        16
       ]
     },
     {
@@ -3527,15 +2942,12 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.56,
-      "plays": 6,
-      "cuts": 20,
+      "liveSeconds": 10.08,
+      "plays": 3,
+      "cuts": 26,
       "gains": [
         6,
-        6,
-        23,
-        11,
-        22
+        6
       ]
     },
     {
@@ -3543,14 +2955,12 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.53,
-      "plays": 5,
-      "cuts": 26,
+      "liveSeconds": 10.11,
+      "plays": 3,
+      "cuts": 27,
       "gains": [
-        49,
-        6,
-        9,
-        8
+        37,
+        9
       ]
     },
     {
@@ -3558,11 +2968,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.01,
-      "plays": 2,
-      "cuts": 20,
+      "liveSeconds": 10.5,
+      "plays": 5,
+      "cuts": 37,
       "gains": [
-        26
+        26,
+        32,
+        6,
+        4
       ]
     },
     {
@@ -3570,12 +2983,15 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.26,
-      "plays": 4,
-      "cuts": 19,
+      "liveSeconds": 10.76,
+      "plays": 7,
+      "cuts": 40,
       "gains": [
         16,
-        44,
+        5,
+        35,
+        4,
+        6,
         6
       ]
     },
@@ -3584,14 +3000,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.52,
+      "liveSeconds": 10.47,
       "plays": 5,
-      "cuts": 16,
+      "cuts": 35,
       "gains": [
-        47,
-        9,
-        6,
-        8
+        32,
+        31,
+        4,
+        6
       ]
     },
     {
@@ -3599,15 +3015,11 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.53,
-      "plays": 6,
-      "cuts": 14,
+      "liveSeconds": 10,
+      "plays": 2,
+      "cuts": 23,
       "gains": [
-        21,
-        14,
-        16,
-        12,
-        8
+        21
       ]
     },
     {
@@ -3615,13 +3027,15 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.3,
-      "plays": 4,
-      "cuts": 19,
+      "liveSeconds": 10.54,
+      "plays": 6,
+      "cuts": 30,
       "gains": [
-        51,
-        10,
-        9
+        34,
+        13,
+        11,
+        6,
+        11
       ]
     },
     {
@@ -3629,12 +3043,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.01,
-      "plays": 3,
-      "cuts": 14,
+      "liveSeconds": 10.35,
+      "plays": 5,
+      "cuts": 25,
       "gains": [
         16,
-        14
+        22,
+        20,
+        6
       ]
     },
     {
@@ -3642,14 +3058,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.46,
-      "plays": 5,
-      "cuts": 20,
+      "liveSeconds": 10.47,
+      "plays": 4,
+      "cuts": 33,
       "gains": [
         10,
-        6,
-        20,
-        31
+        5,
+        36
       ]
     },
     {
@@ -3657,11 +3072,13 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10,
-      "plays": 2,
-      "cuts": 19,
+      "liveSeconds": 10.46,
+      "plays": 4,
+      "cuts": 32,
       "gains": [
-        39
+        45,
+        6,
+        12
       ]
     },
     {
@@ -3669,14 +3086,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.14,
+      "liveSeconds": 10.54,
       "plays": 5,
-      "cuts": 17,
+      "cuts": 38,
       "gains": [
-        14,
-        42,
-        6,
-        13
+        49,
+        4,
+        4,
+        6
       ]
     },
     {
@@ -3685,13 +3102,12 @@
       "result": "touchdown",
       "yards": 75,
       "liveSeconds": 10.33,
-      "plays": 5,
-      "cuts": 17,
+      "plays": 4,
+      "cuts": 29,
       "gains": [
         14,
         10,
-        17,
-        17
+        48
       ]
     },
     {
@@ -3699,14 +3115,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.38,
+      "liveSeconds": 10.25,
       "plays": 5,
-      "cuts": 18,
+      "cuts": 29,
       "gains": [
-        41,
-        20,
-        6,
-        6
+        38,
+        16,
+        16,
+        4
       ]
     },
     {
@@ -3714,14 +3130,17 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.4,
-      "plays": 5,
-      "cuts": 16,
+      "liveSeconds": 10.9,
+      "plays": 8,
+      "cuts": 44,
       "gains": [
         17,
-        16,
-        32,
-        6
+        5,
+        22,
+        7,
+        6,
+        6,
+        9
       ]
     },
     {
@@ -3729,12 +3148,14 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.21,
-      "plays": 3,
-      "cuts": 19,
+      "liveSeconds": 10.34,
+      "plays": 5,
+      "cuts": 27,
       "gains": [
-        35,
-        25
+        17,
+        5,
+        17,
+        36
       ]
     },
     {
@@ -3742,13 +3163,11 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.33,
-      "plays": 4,
-      "cuts": 19,
+      "liveSeconds": 10.07,
+      "plays": 2,
+      "cuts": 26,
       "gains": [
-        10,
-        52,
-        6
+        10
       ]
     },
     {
@@ -3756,12 +3175,12 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.19,
+      "liveSeconds": 10.2,
       "plays": 3,
-      "cuts": 23,
+      "cuts": 29,
       "gains": [
-        37,
-        18
+        48,
+        6
       ]
     },
     {
@@ -3769,13 +3188,12 @@
       "style": "reckless",
       "result": "touchdown",
       "yards": 75,
-      "liveSeconds": 10.23,
-      "plays": 4,
-      "cuts": 19,
+      "liveSeconds": 10.14,
+      "plays": 3,
+      "cuts": 18,
       "gains": [
-        21,
-        37,
-        9
+        57,
+        5
       ]
     }
   ]
