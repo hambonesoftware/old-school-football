@@ -1,6 +1,6 @@
-# v0.6 — Football feedback and balance review
+# v0.6.1 — Football feedback and balance review
 
-Visible tackle aftermath lasts 620 ms, with 55 ms before the fall develops. The clock stops and controls clear while the play resolves. The next formation remains visible before Snap. Defenders commit to their lane for 160 ms, lunge over 180 ms, and recover for 380 ms after a miss. Commitment begins within the existing eight-yard charge range, independently of the slower tracking decision clock.
+Visible tackle aftermath lasts 620 ms, with 55 ms before the fall develops. The clock stops and controls clear while the play resolves. The next formation remains visible before Snap. Defenders commit to their lane for about 139 ms, lunge over 157 ms, and recover for 330 ms after a miss. Commitment begins within the existing eight-yard charge range, independently of the slower tracking decision clock.
 
 ## Automated balance sample
 
@@ -8,10 +8,10 @@ Run `node scripts/arcade-balance.mjs --save` to reproduce the 200 seeded drives 
 
 | Policy | Touchdowns | Mean yards | Mean live seconds | Mean plays |
 | --- | ---: | ---: | ---: | ---: |
-| Straight | 3/50 | 23.5 | 4.2 | 8.0 |
-| Reactive | 50/50 | 75 | 11.4 | 6.3 |
-| Reader | 50/50 | 75 | 11.0 | 3.3 |
-| Reckless | 50/50 | 75 | 10.4 | 4.5 |
+| Straight | 1/50 | 20.8 | 3.7 | 7.5 |
+| Reactive | 50/50 | 75 | 11.5 | 6.9 |
+| Reader | 50/50 | 75 | 11.0 | 3.5 |
+| Reckless | 50/50 | 75 | 10.6 | 5.5 |
 
 The first anticipation implementation let every straight-running bot win. Starting commitment earlier corrected that regression. Lane-aware bots still win every sampled drive, as in v0.5; this remains an accessible arcade challenge, and expert difficulty needs real touchscreen playtesting before further tuning.
 
@@ -26,3 +26,7 @@ The first anticipation implementation let every straight-running bot win. Starti
 ## Repeat before future releases
 
 Review snap, straight run, two cuts, near miss, tackle, first down, touchdown, fourth-down loss, pause/resume, and next formation. Check normal speed for feel and slowed recordings for visual contact. Test phone portrait and landscape, audio unlock/mute, interrupted pointer input, and reduced motion. Automated balance alone does not establish polish or difficulty.
+
+## v0.6.1 tuning
+
+Defensive decision, commitment, lunge and recovery clocks now run 1.15 times as fast. Player speed, collision radius and visible formations stay the same. In 150 matched lane-aware bot drives, tackles increased from 552 to 644 (16.7%). This is a simulation result, not a guaranteed human tackle-rate increase.

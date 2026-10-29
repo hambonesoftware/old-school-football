@@ -1,4 +1,4 @@
-import { drawFootballPlayer } from './player-model.js?v=0.6';
+import { drawFootballPlayer } from './player-model.js?v=0.6.1';
 
 // Presentation state only. Interpolation never changes the rules or collision cells.
 const views = new WeakMap();

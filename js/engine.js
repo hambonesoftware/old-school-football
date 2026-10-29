@@ -1,4 +1,4 @@
-import { BALANCE } from './tuning.js?v=0.6';
+import { BALANCE } from './tuning.js?v=0.6.1';
 
 export class Game {
   constructor(random = Math.random, tuning = BALANCE, controlMode = 'arcade') {
@@ -223,7 +223,7 @@ export class Game {
       if (this.controlMode === 'arcade' && (!d.state || d.state === 'track') && d.lane === this.lane && d.yard > this.yard && d.yard - this.yard <= this.defenseTuning().defenderChargeRange) {
         d.state = 'commit'; d.timer = .16;
       }
-      d.timer = Math.max(0, (d.timer || 0) - dt);
+      d.timer = Math.max(0, (d.timer || 0) - dt * (this.tuning.defenderTempo || 1));
       if (d.state === 'commit' && d.timer === 0) {
         d.state = 'lunge'; d.timer = .18;
         d.fromYard = d.yard;
@@ -243,9 +243,9 @@ export class Game {
     }
     this.tick += dt;
     const defense = this.defenseTuning();
-    const interval = defense.defenderBaseSeconds -
+    const interval = (defense.defenderBaseSeconds -
       Math.min(defense.defenderMaxRampSeconds,
-        Math.max(0, this.yard - 25) * defense.defenderRampPerYard);
+        Math.max(0, this.yard - 25) * defense.defenderRampPerYard)) / (this.tuning.defenderTempo || 1);
     while (this.tick >= interval && this.phase === 'live') {
       this.tick -= interval;
       for (const d of this.defenders) {

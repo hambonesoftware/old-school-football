@@ -1,9 +1,9 @@
-import { loadPlayerAtlases } from './player-model.js?v=0.6';
-import { FootballAudio } from './audio.js?v=0.6';
-import { BALANCE } from './tuning.js?v=0.6';
-import { MovementClock } from './movement.js?v=0.6';
-import { Game } from './engine.js?v=0.6';
-import { render } from './renderer.js?v=0.6';
+import { loadPlayerAtlases } from './player-model.js?v=0.6.1';
+import { FootballAudio } from './audio.js?v=0.6.1';
+import { BALANCE } from './tuning.js?v=0.6.1';
+import { MovementClock } from './movement.js?v=0.6.1';
+import { Game } from './engine.js?v=0.6.1';
+import { render } from './renderer.js?v=0.6.1';
 
 const game = new Game();
 const $ = id => document.getElementById(id);

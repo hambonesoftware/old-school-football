@@ -7,6 +7,8 @@ export const BALANCE = Object.freeze({
   playerSprintYardsPerSecond: 8.0,
   playerBrakeYardsPerSecond: 3.2,
   playerAccelerationSeconds: .18,
+  // 15% faster defensive decisions, commitment, lunge and recovery.
+  defenderTempo: 1.15,
   defenderBaseSeconds: .780,
   defenderMaxRampSeconds: .380,
   defenderRampPerYard: .006,
@@ -25,3 +27,4 @@ export const BALANCE = Object.freeze({
     frontCenterChance: .75
   })
 });
+
