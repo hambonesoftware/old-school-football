@@ -246,11 +246,24 @@ function frame(now) {
       const strip = document.querySelector('.play-strip');
       strip.dataset.result = game.event.type;
       if (playHud) {
-        const tone = game.event.type === "touchdown" || game.event.type === "firstDown"
-          ? "positive" : game.event.type === "tackle" ? "warning" : "neutral";
-        playHud.showEvent(game.message || game.event.type.toUpperCase(), {
-          tone, duration: game.event.type === "touchdown" ? 2800 : 1250
-        });
+        // Snap, surges and cuts happen constantly. They must NOT obscure the
+        // moving players with a giant tutorial card. Only big moments earn
+        // cinematic center-screen feedback.
+        const eventName = game.event.type;
+        const titles = {
+          touchdown: "TOUCHDOWN!",
+          firstDown: "FIRST DOWN!",
+          tackle: "TACKLED",
+          turnover: "TURNOVER",
+          safety: "SAFETY"
+        };
+        if (titles[eventName]) {
+          const tone = eventName === "touchdown" || eventName === "firstDown"
+            ? "positive" : "warning";
+          playHud.showEvent(titles[eventName], {
+            tone, duration: eventName === "touchdown" ? 2200 : 900
+          });
+        }
       }
     }
   }

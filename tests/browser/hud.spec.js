@@ -23,6 +23,7 @@ test("phone field-first broadcast retains real snap and thumb steering",async({p
   expect(layout.field).toBeGreaterThan(245);
   await page.locator("#snap").click();
   await expect(page.locator("#snap")).toBeHidden();
+  await expect(page.locator(".hb-play__announcement")).not.toContainText("RUNNING!");
   await page.locator('[data-dir="right"]').dispatchEvent("pointerdown",{pointerId:7,pointerType:"touch"});
   await page.locator('[data-dir="right"]').dispatchEvent("pointerup",{pointerId:7,pointerType:"touch"});
   await page.screenshot({path:"test-results/football-play-"+info.project.name+".png"});
