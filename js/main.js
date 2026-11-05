@@ -1,4 +1,5 @@
 import { loadPlayerAtlases } from './player-model.js?v=0.6.1';
+import { createPlayHUD } from '../vendor/hambone-play/hambone-play.js';
 import { FootballAudio } from './audio.js?v=0.6.1';
 import { BALANCE } from './tuning.js?v=0.6.1';
 import { MovementClock } from './movement.js?v=0.6.1';
@@ -7,6 +8,35 @@ import { render } from './renderer.js?v=0.6.1';
 
 const game = new Game();
 const $ = id => document.getElementById(id);
+let playHud = null;
+function installBroadcastHud() {
+  const root = document.querySelector(".field-wrap");
+  const hud = createPlayHUD({
+    root, viewport: root, style: "broadcast", title: "HBN LIVE",
+    metrics: [
+      { id: "score", label: "GL · IV", value: "14–19" },
+      { id: "time", label: "4TH", value: "2:00" },
+      { id: "down", label: "DOWN / DISTANCE", value: "1st & 10" }
+    ]
+  });
+  hud.bindReadout($("home"), "score", value => value + " : 19");
+  hud.bindReadout($("clock"), "time");
+  hud.bindReadout($("down"), "down");
+  // Move the ORIGINAL elements, not substitutes: previously registered
+  // touch, keyboard, pointer capture, pause and settings handlers survive.
+  hud.placeControl($("pause"), "utilities");
+  hud.placeControl($("settings-toggle"), "utilities");
+  hud.placeControl($("snap"), "actions");
+  $("snap").classList.add("is-primary");
+  const dpad = document.querySelector(".dpad");
+  root.appendChild(dpad);
+  dpad.classList.add("hb-football-dpad");
+  hud.registerOccluder(dpad);
+  hud.setPhase("ready");
+  hud.setStatus("Read the defense · then snap");
+  return hud;
+}
+
 const canvas = $('field');
 const ctx = canvas.getContext('2d');
 await loadPlayerAtlases();
@@ -172,6 +202,7 @@ function updateHud() {
   $('message').textContent = game.phase === 'paused' ? 'Play paused. Press Resume when you are ready.' : game.message;
   $('snap-label').textContent = game.phase === 'over' ? 'NEW DRIVE' : game.phase === 'live' ? 'BALL LIVE' : game.phase === 'paused' ? 'PAUSED' : game.phase === 'aftermath' ? 'PLAY RESULT' : 'SNAP BALL';
   $('snap').disabled = !['ready','over'].includes(game.phase);
+  $('snap').hidden = !['ready','over'].includes(game.phase);
   $('pause').textContent = game.phase === 'paused' ? 'Resume' : 'Pause';
   $('pause').disabled = game.phase === 'ready' || game.phase === 'over';
   $('live').textContent = { aftermath: 'WHISTLE', ready: 'PRE-SNAP', live: '● LIVE', paused: 'PAUSED', over: game.score === 20 ? 'TOUCHDOWN' : 'FINAL' }[game.phase];
@@ -188,6 +219,16 @@ function updateHud() {
     game.controlMode === 'arcade' ? 'Hold for a running surge' : 'Run forward');
   document.querySelector('[data-dir="down"]').setAttribute('aria-label',
     game.controlMode === 'arcade' ? 'Hold to brake' : 'Run backward');
+  if (playHud) {
+    const phase = game.phase === "over" ? "result" :
+      game.phase === "paused" ? "paused" :
+      game.phase === "ready" ? "ready" : "playing";
+    playHud.setPhase(phase);
+    const status = game.phase === "ready" ? "Read defense · snap when ready" :
+      game.phase === "paused" ? "Play paused" :
+      game.phase === "over" ? "Drive complete · start a new drive" : "";
+    playHud.setStatus(status, game.phase === "over" ? "positive" : "neutral");
+  }
 }
 function frame(now) {
   const dt = Math.min(.05, (now - last) / 1000);
@@ -204,6 +245,13 @@ function frame(now) {
       audio.event(game.event.type);
       const strip = document.querySelector('.play-strip');
       strip.dataset.result = game.event.type;
+      if (playHud) {
+        const tone = game.event.type === "touchdown" || game.event.type === "firstDown"
+          ? "positive" : game.event.type === "tackle" ? "warning" : "neutral";
+        playHud.showEvent(game.message || game.event.type.toUpperCase(), {
+          tone, duration: game.event.type === "touchdown" ? 2800 : 1250
+        });
+      }
     }
   }
   audio.update(game);
@@ -220,5 +268,6 @@ $('motion').textContent = reducedMotion ? 'Reduced motion on' : 'Reduced motion 
 // Opt-in local QA surface; absent from normal game sessions.
 if (new URLSearchParams(location.search).has('qa')) window.footballQA = { game, audio };
 updateHud();
+playHud = installBroadcastHud();
 requestAnimationFrame(frame);
 

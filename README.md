@@ -57,3 +57,12 @@ Runner movement is 150 ms per step. Defense acts a little faster and starts with
 - Run npm test for the automated rules and model suite. Run node scripts/arcade-balance.mjs for 200 seeded arcade games, or add --save to regenerate the committed result JSON.
 - See [the 200-game balance report](docs/arcade-balance-200.md). The simulation does not substitute for hands-on phone playtesting.
 
+
+
+## Hambone PLAY Broadcast HUD (v0.7)
+
+The full-screen field presentation uses a pinned copy of [Hambone PLAY v1](https://github.com/hambonesoftware/arcade/tree/main/play/v1), with a compact GL/IV scorebug, fourth-quarter clock and down-and-distance state. The original four-way D-pad was moved into the left thumb zone of the field, while the actual Snap button sits on the right. The existing input handlers are preserved; the HUD is visual only and never changes player speed, defender physics or score logic.
+
+Pause, Resume and Settings remain the actual controls, relocated to the top-right. Snap hides automatically during a live play so the field is less obstructed. Score and play messages are driven by the original game state. Touch/gameplay browser tests run on a phone-sized viewport before the GitHub Pages build is published.
+
+These tests are Chromium device emulation rather than hands-on physical iPhone Safari testing.

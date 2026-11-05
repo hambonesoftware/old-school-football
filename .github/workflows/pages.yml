@@ -25,6 +25,17 @@ jobs:
         run: npm test
       - name: Run 200-game balance smoke test
         run: node scripts/arcade-balance.mjs
+      - name: Test original gameplay in a mobile Broadcast HUD
+        run: |
+          npm install --no-save --no-audit --no-fund @playwright/test@1.56.1
+          npx playwright install --with-deps chromium
+          npx playwright test -c playwright.config.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: football-play-mobile-qa
+          path: test-results/
+          if-no-files-found: ignore
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

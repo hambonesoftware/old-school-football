@@ -1,0 +1,88 @@
+/* Hambone PLAY Broadcast · edge controls and real football scoreboard */
+body{overflow:hidden}
+.app{height:100dvh;max-height:100dvh;min-height:0;max-width:none;padding:0;overflow:hidden}
+.masthead,.scorebug,.play-strip,.control-deck{display:none!important}
+.field-wrap{flex:1;min-height:0;isolation:isolate}
+.field-wrap>.hb-play{
+ --hb-top:0px;--hb-bottom:0px;--hb-accent:#f4ca69;
+ --hb-surface:#101c24ee;--hb-outline:#efcc8099;
+ --hb-ink:#fff9e8;--hb-muted:#b9c2bc;
+ z-index:30
+}
+.field-wrap .hb-play__scorebug{
+ top:calc(10px + env(safe-area-inset-top,0px));
+ left:calc(10px + env(safe-area-inset-left,0px));
+ max-width:calc(100% - 205px);padding:7px 10px;
+ background:#101b22f0;border:1px solid #e9bd6c9c;border-left:4px solid #f0cb70;
+ border-radius:2px;box-shadow:0 5px 22px #0007;min-height:48px;
+}
+.field-wrap .hb-play__identity{font:900 11px/1.15 Impact,Arial,sans-serif;color:#f3c87e;letter-spacing:.04em;min-width:42px}
+.field-wrap .hb-play__readout-value{font:900 18px/1.05 Impact,Arial,sans-serif}
+.field-wrap .hb-play__readout-label{font:850 8px/1 Arial,sans-serif;color:#cccab7;letter-spacing:0}
+.field-wrap .hb-play__readouts{gap:11px}
+.field-wrap .hb-play__utilities{
+ top:calc(9px + env(safe-area-inset-top,0px));right:calc(10px + env(safe-area-inset-right,0px));gap:6px
+}
+.field-wrap .hb-play__utilities button{
+ background:#152631ed;border:1px solid #ccad7399;border-radius:5px;
+ padding:8px;min-width:50px;min-height:48px;font-size:11px;font-weight:900;color:#f6ebc9
+}
+.field-wrap .hb-play__actions{
+ left:auto;width:auto;right:calc(13px + env(safe-area-inset-right,0px));
+ bottom:calc(14px + env(safe-area-inset-bottom,0px));
+}
+.field-wrap .hb-play__actions #snap{
+ display:flex;align-items:center;justify-content:center;gap:8px;
+ width:138px;height:57px;min-height:57px;min-width:120px;
+ transform:none;border-radius:6px;border:1px solid #ffe9ad;
+ background:linear-gradient(#ffdd8a,#e7b65e);color:#17212b;
+ box-shadow:0 5px 18px #0008;font:900 14px Impact,Arial,sans-serif;
+}
+.field-wrap .hb-play__actions #snap:disabled{background:#273740;color:#b6c5c8;border-color:#64737b}
+.field-wrap .hb-play__actions #snap[hidden]{display:none!important}
+.field-wrap .hb-play__status{
+ bottom:calc(91px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);
+ max-width:calc(100% - 35px);white-space:normal;text-align:center;border-radius:4px;
+ background:#11242bdf;font-size:12px
+}
+.field-wrap .hb-play__announcement{
+ top:25%;font:900 clamp(19px,4vw,30px) Impact,Arial,sans-serif;
+ text-transform:uppercase;border-radius:3px;letter-spacing:.04em
+}
+.field-wrap .hb-football-dpad{
+ position:absolute;z-index:36;left:calc(12px + env(safe-area-inset-left,0px));
+ bottom:calc(12px + env(safe-area-inset-bottom,0px));
+ pointer-events:auto;touch-action:none;
+ grid-template-columns:55px 45px 55px;grid-template-rows:41px 35px 41px;
+ filter:drop-shadow(0 3px 4px #0009)
+}
+.field-wrap .hb-football-dpad button{
+ min-width:0;min-height:0;padding:0;border:1px solid #7e99a6;
+ background:linear-gradient(#3d5b6c,#1f3544);color:#ffedd5;font-size:24px;
+}
+.field-wrap .hb-football-dpad button:active,.field-wrap .hb-football-dpad button.held{
+ background:#f3d17e;color:#17212b
+}
+.settings{
+ z-index:70;top:calc(68px + env(safe-area-inset-top,0px));
+ right:calc(11px + env(safe-area-inset-right,0px));
+ max-height:calc(100dvh - 85px);overflow:auto;
+}
+@media(max-width:560px){
+ .field-wrap .hb-play__scorebug{max-width:calc(100% - 146px);gap:6px;padding:6px 7px}
+ .field-wrap .hb-play__identity{display:none}
+ .field-wrap .hb-play__readouts{gap:9px}
+ .field-wrap .hb-play__readout-value{font-size:15px}
+ .field-wrap .hb-play__readout-label{font-size:7px}
+ .field-wrap .hb-play__utilities button{min-width:49px;padding:7px}
+ .field-wrap .hb-football-dpad{grid-template-columns:50px 43px 50px;grid-template-rows:39px 31px 39px}
+ .field-wrap .hb-play__actions #snap{min-width:120px;width:130px}
+}
+@media(max-height:500px) and (orientation:landscape){
+ .field-wrap .hb-football-dpad{grid-template-columns:42px 35px 42px;grid-template-rows:31px 23px 31px}
+ .field-wrap .hb-play__status{display:none!important}
+ .field-wrap .hb-play__actions #snap{height:49px;min-height:49px;width:118px}
+}
+@media(prefers-reduced-motion:reduce){
+ .field-wrap .hb-play *{animation:none!important;transition:none!important}
+}
